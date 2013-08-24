@@ -1,9 +1,13 @@
 require 'rubygems'
 require 'sinatra'
 require 'mongo'
+require 'mongo_mapper'
 require 'json'
+require_relative 'models/user'
 
-DB = Mongo::Connection.new.db("landa", :pool_size => 5, :timeout => 5)
+configure do
+  MongoMapper.database = 'landa'
+end
 
 not_found do
   send_file File.expand_path('404.html', settings.public_folder)
@@ -14,7 +18,7 @@ get '/' do
 end
 
 post '/signup' do
-  oid = DB.collection('user').insert(JSON.parse(params.to_json))
-  haml :confirmation, locals: { email: params[:email] }
+  user = User.create(email: params[:email])
+  haml :confirmation, locals: { email: user.email }
 end
 

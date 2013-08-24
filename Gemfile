@@ -6,6 +6,7 @@ gem "mongo"
 gem "bson_ext"
 
 gem "haml"
+gem "mongo_mapper"
 
 group :development do
   gem 'foreman'
