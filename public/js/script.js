@@ -9,15 +9,12 @@ $(function(){
 	  idAttribute: "_id",
     url: "/api/user",
 
-    // Default attributes for a todo item.
-    defaults: function() {
-      return {};
-    },
-
     signup: function(user) {
       this.save(user);
     }
   });
+
+  window.User = new User;
 
   // The Application
   // ---------------
@@ -47,10 +44,12 @@ $(function(){
     signup: function(e) {
       var text = this.input.val();
       if (!text) return;
-      var user = new User;
-      user.signup({email: text});
+
+      User.signup({email: text});
+
       this.input.val('');
       this.toggleDisclaimer();
+      this.showConfirmation();
     },
 
     // Lazily show or hide the disclaimer
@@ -66,6 +65,11 @@ $(function(){
         var show = function() { tooltip.show().fadeIn(); };
         this.tooltipTimeout = _.delay(show, 1000);
       }
+    },
+
+    showConfirmation: function(e) {
+      var confirmation = _.template($('#confirmation-template').html());
+      this.$('#create-signup').html(confirmation);
     }
 
   });
