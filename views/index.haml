@@ -1,0 +1,12 @@
+%div#landa
+  %div.title
+    %h1
+      Welcome home
+      %div.content
+        %div#errors
+          %span= flash[:error] if flash[:error]
+        %form#signup-form{action: "/signup", method: "post"}
+          %input#email{name: "email", placeholder: "Email address", type: "text"}
+          %button#signup-submit{type:"submit"} Sign me up!
+          %p.disclaimer{style: "display:none;"} By signing up, you acknowledge and agree our terms and conditions
+
