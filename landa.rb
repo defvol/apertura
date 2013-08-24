@@ -3,7 +3,11 @@ require 'sinatra'
 require 'mongo'
 require 'mongo_mapper'
 require 'json'
+require 'rack-flash'
 require_relative 'models/user'
+
+enable :sessions
+use Rack::Flash
 
 configure do
   MongoMapper.database = 'landa'
@@ -18,7 +22,12 @@ get '/' do
 end
 
 post '/signup' do
-  user = User.create(email: params[:email])
-  haml :confirmation, locals: { email: user.email }
+  user = User.new(email: params[:email])
+  if user.save
+    haml :confirmation, locals: { email: user.email }
+  else
+    flash[:error] = user.errors.full_messages.join(",")
+    redirect "/"
+  end
 end
 

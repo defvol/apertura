@@ -30,6 +30,8 @@ GEM
     plucky (0.5.2)
       mongo (~> 1.5)
     rack (1.5.2)
+    rack-flash3 (1.0.3)
+      rack
     rack-protection (1.5.0)
       rack
     rack-test (0.6.2)
@@ -55,6 +57,7 @@ DEPENDENCIES
   haml
   mongo
   mongo_mapper
+  rack-flash3
   rack-test
   rake
   sinatra

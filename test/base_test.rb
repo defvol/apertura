@@ -11,8 +11,18 @@ class BaseTest < Test::Unit::TestCase
     assert last_response.body.include?('Welcome')
   end
 
-  def test_it_validates_email
-    post '/api/user', { email: 'foo' }.to_json
+  def test_that_email_cant_be_blank
+    post '/signup'
+    assert_not_equal last_response.status, 200
+  end
+
+  def test_email_uniqueness
+    2.times { post '/signup', { :email => 'test@foo.bar' } }
+    assert_not_equal last_response.status, 200
+  end
+
+  def test_email_validation
+    post '/signup', { email: 'bar' }
     assert_not_equal last_response.status, 200
   end
 end
