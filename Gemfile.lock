@@ -1,6 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    bson (1.9.2)
+    bson_ext (1.9.2)
+      bson (~> 1.9.2)
     daemons (1.1.9)
     dotenv (0.7.0)
     eventmachine (1.0.3)
@@ -9,6 +12,8 @@ GEM
       thor (>= 0.13.6)
     haml (4.0.3)
       tilt
+    mongo (1.9.2)
+      bson (~> 1.9.2)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -27,7 +32,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson_ext
   foreman
   haml
+  mongo
   sinatra
   thin

@@ -7,7 +7,7 @@ $(function(){
   // Our basic **User** model has an `email` attribute.
   window.User = Backbone.Model.extend({
 	  idAttribute: "_id",
-    url: "/api/users",
+    url: "/api/user",
 
     // Default attributes for a todo item.
     defaults: function() {
@@ -32,7 +32,7 @@ $(function(){
     // Delegated events for creating new entries
 
     events: {
-      "keydown #email"        : "showDisclaimer",
+      "keydown #email"        : "toggleDisclaimer",
       "click #signup_submit"  : "signup"
     },
 
@@ -50,11 +50,12 @@ $(function(){
       var user = new User;
       user.signup({email: text});
       this.input.val('');
+      this.toggleDisclaimer();
     },
 
     // Lazily show or hide the disclaimer
 
-    showDisclaimer: function(e) {
+    toggleDisclaimer: function(e) {
       var tooltip = this.$(".disclaimer");
       if (this.tooltipTimeout) clearTimeout(this.tooltipTimeout);
 
