@@ -13,8 +13,8 @@ get '/' do
   haml :index
 end
 
-post '/api/:user' do
-  oid = DB.collection(params[:user]).insert(JSON.parse(request.body.read.to_s))
-  "{\"_id\": \"#{oid.to_s}\"}"
+post '/signup' do
+  oid = DB.collection('user').insert(JSON.parse(params.to_json))
+  haml :confirmation, locals: { email: params[:email] }
 end
 

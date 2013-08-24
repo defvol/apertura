@@ -3,13 +3,8 @@
     %h1
       Welcome home
       %div.content
-        %div#create-signup
-          %input#email{placeholder: "Email address", type: "text"}
-          %button#signup_submit{type:"submit", class:"btn btn-large span3"} Sign me up!
+        %form#signup-form{action: "/signup", method: "post"}
+          %input#email{name: "email", placeholder: "Email address", type: "text"}
+          %button#signup-submit{type:"submit"} Sign me up!
           %p.disclaimer{style: "display:none;"} By signing up, you acknowledge and agree our terms and conditions
-
-/ Templates
-
-%script#confirmation-template{"type" => "text/template"}
-  %span Thanks for signing up
 
