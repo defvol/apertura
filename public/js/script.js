@@ -2,13 +2,10 @@ $(function() {
   $("#email").keydown(toggleDisclaimer);
 
   // Dynamic fields
-
-  var templateHtml = $('#data-request-template').html()
-  $("#data-requests").append(_.template(templateHtml));
-
+  var template = $('.data-request').first().clone();
   $("a#new-data-request").click(function(e) {
+    $("#data-requests").append(template.clone());
     e.preventDefault();
-    $("#data-requests").append(_.template(templateHtml));
   });
 });
 
