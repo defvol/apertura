@@ -1,12 +1,30 @@
 require 'rake/testtask'
 
 namespace :test do
+
   desc "Run all tests"
   task :all do
-    test_task = Rake::TestTask.new("alltests") do |t|
+    test_task = Rake::TestTask.new("all") do |t|
       t.test_files = Dir.glob(File.join("test", "**", "*_test.rb"))
     end
-    task("alltests").execute
+    task("all").execute
   end
+
+  desc "Run base tests"
+  task :base do
+    test_task = Rake::TestTask.new("base") do |t|
+      t.test_files = Dir.glob(File.join("test", "base_test.rb"))
+    end
+    task("base").execute
+  end
+
+  desc "Run acceptance tests"
+  task :acceptance do
+    test_task = Rake::TestTask.new("acceptance") do |t|
+      t.test_files = Dir.glob(File.join("test", "acceptance_test.rb"))
+    end
+    task("acceptance").execute
+  end
+
 end
 
