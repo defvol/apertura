@@ -17,10 +17,10 @@
 / Templates
 
 %script#data-request-template{"type" => "text/template"}
-  #data-request
-    %input(name="data-request[description][]" placeholder="Presupuesto para educación 2013" type="text")
-    %select(name="data-request[category][]")
-      %option(value="" disabled selected) Categoría
+  .data-request
+    %input(name="data-request[][description]" placeholder="Presupuesto para educación 2013" type="text")
+    %select(name="data-request[][category]")
+      %option(disabled selected) Categoría
       %option Gasto público
       %option Salud
       %option Educación
