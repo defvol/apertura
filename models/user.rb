@@ -1,5 +1,6 @@
 class User
   include MongoMapper::Document
+  many :data_requests
 
   key :email, String, unique: true
   timestamps!
@@ -12,5 +13,12 @@ class User
       errors.add(:email, "is not valid")
     end
   end
+end
+
+class DataRequest
+  include MongoMapper::EmbeddedDocument
+
+  key :description, String
+  key :category,    String
 end
 

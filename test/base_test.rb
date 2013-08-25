@@ -25,5 +25,17 @@ class BaseTest < Test::Unit::TestCase
     post '/signup', { email: 'bar' }
     assert_not_equal last_response.status, 200
   end
+
+  def test_embedded_data_request
+    email = "test@foo.bar"
+
+    # Clean up
+    user = User.find_by_email(email)
+    user.delete if user
+
+    request = { description: "RAW DATA NOW", category: "Education" }
+    user = User.new(email: email, data_requests:[request])
+    assert user.save
+  end
 end
 
