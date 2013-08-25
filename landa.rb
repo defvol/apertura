@@ -10,7 +10,7 @@ enable :sessions
 use Rack::Flash
 
 configure do
-  MongoMapper.database = 'landa'
+  MongoMapper.database = "landa_#{ENV['RACK_ENV']}"
 end
 
 not_found do
