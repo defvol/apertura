@@ -6,7 +6,25 @@
         %div#errors
           %span= flash[:error] if flash[:error]
         %form#signup-form{action: "/signup", method: "post"}
-          %input#email{name: "email", placeholder: "Email address", type: "text"}
-          %button#signup-submit{type:"submit"} Sign me up!
-          %p.disclaimer{style: "display:none;"} By signing up, you acknowledge and agree our terms and conditions
+          #data-requests
+          #new-data-request-wrapper
+            %a#new-data-request{href:"#"} Agregar
+          #enrollment
+            %input#email{name: "email", placeholder: "Email address", type: "text"}
+            %button#signup-submit{type:"submit"} Sign me up!
+            %p.disclaimer{style: "display:none;"} By signing up, you acknowledge and agree our terms and conditions
+
+/ Templates
+
+%script#data-request-template{"type" => "text/template"}
+  #data-request
+    %input(name="data-request[description][]" placeholder="Presupuesto para educación 2013" type="text")
+    %select(name="data-request[category][]")
+      %option(value="" disabled selected) Categoría
+      %option Gasto público
+      %option Salud
+      %option Educación
+      %option Economía
+      %option Seguridad
+      %option Otro
 

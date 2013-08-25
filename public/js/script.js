@@ -1,5 +1,13 @@
 $(function() {
   $("#email").keydown(toggleDisclaimer);
+
+  var templateHtml = $('#data-request-template').html()
+  $("#data-requests").append(_.template(templateHtml));
+
+  $("a#new-data-request").click(function(e) {
+    e.preventDefault();
+    $("#data-requests").append(_.template(templateHtml));
+  });
 });
 
 function toggleDisclaimer(e) {
