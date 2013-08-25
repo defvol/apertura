@@ -1,6 +1,8 @@
 $(function() {
   $("#email").keydown(toggleDisclaimer);
 
+  // Dynamic fields
+
   var templateHtml = $('#data-request-template').html()
   $("#data-requests").append(_.template(templateHtml));
 
@@ -18,5 +20,10 @@ function toggleDisclaimer(e) {
   } else {
     tooltip.show().fadeIn();
   }
+}
+
+function removeDataRequest(e) {
+  $(e).parent().remove();
+  return false;
 }
 
