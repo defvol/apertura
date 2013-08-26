@@ -2,26 +2,26 @@
   %div.title
     %h1
       Welcome home
-      %div.content
-        %div#errors
-          %span= flash[:error] if flash[:error]
-        %form#signup-form{action: "/signup", method: "post"}
-          #data-requests
-            .data-request
-              %input(name="data-requests[][description]" placeholder="Presupuesto para educación 2013" type="text")
-              %select(name="data-requests[][category]")
-                %option(value="" disabled selected) Categoría
-                %option Gasto público
-                %option Salud
-                %option Educación
-                %option Economía
-                %option Seguridad
-                %option Otro
-              %a.remove-data-request(href="#" onclick="removeDataRequest(this)") Remover
-          #new-data-request-wrapper
-            %a#new-data-request{href:"#"} Agregar
-          #enrollment
-            %input#email{name: "email", placeholder: "Email address", type: "text"}
-            %button#signup-submit{type:"submit"} Sign me up!
-            %p.disclaimer{style: "display:none;"} By signing up, you acknowledge and agree our terms and conditions
+    %div.content
+      %form#signup-form{action: "/signup", method: "post"}
+        #data-requests
+          .data-request
+            %input(name="data-requests[][description]" placeholder="Presupuesto para educación 2013" type="text")
+            %select(name="data-requests[][category]")
+              %option(value="" disabled selected) Categoría
+              %option Gasto público
+              %option Salud
+              %option Educación
+              %option Economía
+              %option Seguridad
+              %option Otro
+            %a.remove-data-request(href="#" onclick="removeDataRequest(this)") Remover
+        #new-data-request-wrapper
+          %a#new-data-request{href:"#"} Agregar
+        #enrollment
+          %input#email{name: "email", placeholder: "Email address", type: "text"}
+          %button#signup-submit{type:"submit"} Sign me up!
+          - if flash[:error]
+            %div#errors= flash[:error]
+          %p.disclaimer{style: "display:none;"} By signing up, you acknowledge and agree our terms and conditions
 
