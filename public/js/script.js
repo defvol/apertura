@@ -20,7 +20,7 @@ function toggleDisclaimer(e) {
 }
 
 function removeDataRequest(e) {
-  $(e).parent().remove();
+  $(e).closest(".data-request").remove();
   return false;
 }
 
