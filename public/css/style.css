@@ -1,4 +1,43 @@
 
+body header {
+  background-color: #3a3835;
+  color: #fff;
+}
+
 .container {
   padding-top: 40px;
 }
+
+h1 {
+  text-transform:uppercase;
+}
+
+i {
+  color: #000;
+  font-size: 24px;
+  padding: 5px;
+}
+
+.btn, .form-control {
+  border-radius: 0;
+  height: 40px;
+}
+
+.btn {
+  background-color: #000;
+  color: #fff;
+}
+
+.btn:hover, .btn:focus {
+  color: #fff;
+  font-weight: bold;
+}
+
+#errors {
+  color: #b94a48;
+}
+
+.data-request {
+  padding-bottom: 10px;
+}
+
