@@ -1,29 +1,28 @@
-%h4 ¿Qué dato del gobierno te gustaría conocer?
-%br
+%p.lead ¿Qué dato del gobierno te gustaría conocer?
+
 %form(action="/signup" method="post" role="form")
   #data-requests
-    .data-request.form-inline.row
-      .col-md-3
-        %input.form-control(name="data-requests[][description]" placeholder="Ej. Presupuesto para salud" type="text")
-      .col-md-3
-        %select.form-control(name="data-requests[][category]")
-          %option(value="" disabled selected) Categoría
-          %option Gasto público
-          %option Salud
-          %option Educación
-          %option Economía
-          %option Seguridad
-          %option Otro
-      .col-md-1
-        %a.remove-data-request(href="#" onclick="removeDataRequest(this)")
-          %i.glyphicon.glyphicon-minus-sign
-  #new-data-request-wrapper.row
-    %a#new-data-request.col-md-1.col-md-offset-6{href:"#"}
-      %i.glyphicon.glyphicon-plus-sign
+    .data-request
+      .row
+        .col-md-9
+          %input.form-control(name="data-requests[][description]" placeholder="Ej. Presupuesto para salud" type="text")
+      .row
+        .col-md-9
+          %select.form-control(name="data-requests[][category]")
+            %option(value="" disabled selected) Categoría
+            %option Gasto público
+            %option Salud
+            %option Educación
+            %option Economía
+            %option Seguridad
+            %option Otro
+        .col-md-1
+          %a#new-data-request(href="#" onclick="addDataRequest(this)")
+            %i.glyphicon.glyphicon-plus
   #enrollment.form-inline.row
+    .col-md-9
+      %input#email.form-control{name: "email", placeholder: "Correo electrónico", type: "text"}
     .col-md-3
-      %input#email.form-control{name: "email", placeholder: "Email address", type: "text"}
-    .col-md-2
       %button#signup-submit.btn.form-control{type:"submit"} Registrar
   .row
     .col-md-12

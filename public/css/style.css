@@ -1,11 +1,9 @@
 
-body header {
-  background-color: #3a3835;
-  color: #fff;
-}
+/* Style */
 
-.container {
-  padding-top: 40px;
+body {
+  background-color: #f0f0ee;
+  color: #000;
 }
 
 h1 {
@@ -15,12 +13,6 @@ h1 {
 i {
   color: #000;
   font-size: 24px;
-  padding: 5px;
-}
-
-.btn, .form-control {
-  border-radius: 0;
-  height: 40px;
 }
 
 .btn {
@@ -30,14 +22,17 @@ i {
 
 .btn:hover, .btn:focus {
   color: #fff;
-  font-weight: bold;
+  text-decoration: underline;
+}
+
+.btn, .form-control {
+  border-radius: 0;
+  height: 44px;
 }
 
 #errors {
   color: #b94a48;
 }
 
-.data-request {
-  padding-bottom: 10px;
-}
+
 

@@ -1,0 +1,31 @@
+
+/* Mobile first */
+
+.container {
+  padding: 20px 15px 20px 15px;
+}
+
+input, select, i {
+  margin-bottom: 15px;
+}
+
+/* Responsive: Portrait tablets and up */
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 480px;
+  }
+
+  header {
+    margin-bottom: 10px;
+  }
+
+  i {
+    margin: 8px 0 7px 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  p { font-size: 12px; }
+}
+
