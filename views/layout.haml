@@ -15,6 +15,7 @@
   / CSS concatenated and minified via ant build script
   %link{'rel' => 'stylesheet', 'href' => 'css/bootstrap.min.css'}/
   %link{'rel' => 'stylesheet', 'href' => 'css/bootstrap-theme.min.css'}/
+  %link{'rel' => 'stylesheet', 'href' => 'css/layout.css'}/
   %link{'rel' => 'stylesheet', 'href' => 'css/style.css'}/
   / end CSS
 
@@ -23,9 +24,9 @@
 %body
   %header
     .container
-      %h1.span12 Page header
-      %h3.span12 Subheader
-  %div.container
+      %h1 DATOS.GOB.MX
+      %h3 Gobierno abierto
+  .container
     = yield
   %footer
   /! end of #container
