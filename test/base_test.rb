@@ -8,7 +8,7 @@ class BaseTest < Test::Unit::TestCase
 
   def test_root
     get '/'
-    assert last_response.body.include?('Welcome')
+    assert last_response.body.include?('body')
   end
 
   def test_that_email_cant_be_blank

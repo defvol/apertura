@@ -1,12 +1,11 @@
+var dataRequestTemplate = '';
+var removeDataRequestHtml = '<a class="remove-data-request" href="#" onclick="removeDataRequest(this)"><i class="glyphicon glyphicon-remove"></i></a>';
+
 $(function() {
   $("#email").keydown(toggleDisclaimer);
 
   // Dynamic fields
-  var template = $('.data-request').first().clone();
-  $("a#new-data-request").click(function(e) {
-    $("#data-requests").append(template.clone());
-    e.preventDefault();
-  });
+  dataRequestTemplate = $('.data-request').first().clone();
 });
 
 function toggleDisclaimer(e) {
@@ -17,6 +16,12 @@ function toggleDisclaimer(e) {
   } else {
     tooltip.show().fadeIn();
   }
+}
+
+function addDataRequest(e) {
+  $("#data-requests").append(dataRequestTemplate.clone());
+  $(e).replaceWith(removeDataRequestHtml);
+  return false;
 }
 
 function removeDataRequest(e) {
