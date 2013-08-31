@@ -25,7 +25,8 @@ class AcceptanceTest < Test::Unit::TestCase
     visit '/'
     fill_in('email', :with => some_email)
     click_button('signup-submit')
-    assert page.has_content?('Thanks')
+    assert_equal '/signup', current_path
+    assert_equal 1, User.where(email: some_email).count
   end
 
   def test_it_appends_requested_data
