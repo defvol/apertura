@@ -7,7 +7,7 @@
   %meta{'charset' => 'utf-8'}/
   %meta{'http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge,chrome=1'}/
 
-  %title TITLE
+  %title= t('layout.title')
   %meta{'name' => 'description', 'content' => ''}/
   %meta{'name' => 'author', 'content' => ''}/
   %meta{'name' => 'viewport', 'content' => 'width=device-width,initial-scale=1'}/
@@ -24,8 +24,8 @@
 %body
   %header
     .container
-      %h1 DATOS.GOB.MX
-      %h3 Gobierno abierto
+      %h1= t('layout.header')
+      %h3= t('layout.tagline')
   .container
     = yield
   %footer

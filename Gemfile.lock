@@ -90,6 +90,7 @@ DEPENDENCIES
   capybara
   foreman
   haml
+  i18n
   mongo
   mongo_mapper!
   rack-flash3

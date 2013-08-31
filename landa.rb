@@ -4,9 +4,12 @@ require 'mongo'
 require 'mongo_mapper'
 require 'json'
 require 'rack-flash'
+require 'i18n'
 
 Dir[File.join(File.dirname(__FILE__), 'helpers', '*.rb')].each { |file| require file }
 Dir[File.join(File.dirname(__FILE__), 'models', '*.rb')].each { |file| require file }
+
+I18n.load_path += Dir[File.join(File.dirname(__FILE__), 'config', 'locales', '*.yml').to_s]
 
 enable :sessions
 use Rack::Flash
@@ -19,12 +22,35 @@ configure do
   end
 end
 
+helpers do
+  def t(*args)
+    I18n.t(*args)
+  end
+
+  def link_to(url, text = url, options = {})
+    attributes = ""
+    options.each do |key, value|
+      attributes << key.to_s << '="' << value << '" '
+    end
+    "<a href=\"#{url}\" #{attributes}>#{text}</a>"
+  end
+end
+
+before do
+  locale = params[:locale]
+  I18n.locale = locale || :es
+end
+
 not_found do
   send_file File.expand_path('404.html', settings.public_folder)
 end
 
 get '/' do
   haml :index
+end
+
+get '/privacidad' do
+  haml :privacy
 end
 
 post '/signup' do
