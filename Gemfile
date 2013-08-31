@@ -12,6 +12,8 @@ gem "mongo_mapper", :git => "git://github.com/wilhelmbot/mongomapper.git"
 gem "haml"
 gem 'rack-flash3'
 
+gem 'i18n'
+
 group :development do
   gem 'foreman'
 end

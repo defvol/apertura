@@ -1,0 +1,24 @@
+es:
+  confirmation:
+    thanks: Gracias por tu registro
+    coda: Te mantendremos al tanto
+  form:
+    disclaimer: Al registrarte confirmas estar de acuerdo con nuestra leyenda de privacidad ubicada en %{link}
+    email: Correo electrónico
+    lead: ¿Qué dato del gobierno te gustaría conocer?
+    request:
+      example: Ej. Presupuesto para salud
+      category:
+        placeholder: Categoría
+        one: Gasto Público
+        two: Salud
+        three: Educación
+        four: Economía
+        five: Seguridad
+        other: Otro
+    signup: Registrar
+  layout:
+    title: DATOS.GOB.MX
+    header: DATOS.GOB.MX
+    tagline: Gobierno abierto
+
