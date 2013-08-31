@@ -12,7 +12,11 @@ enable :sessions
 use Rack::Flash
 
 configure do
-  MongoMapper.database = "landa_#{ENV['RACK_ENV']}"
+  if ENV['MONGODB_URI'].nil?
+    MongoMapper.database = "landa_#{ENV['RACK_ENV']}"
+  else
+    MongoMapper.setup({'production' => {'uri' => ENV['MONGODB_URI']}}, 'production')
+  end
 end
 
 not_found do
