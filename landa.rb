@@ -49,6 +49,10 @@ get '/' do
   haml :index
 end
 
+get '/privacidad' do
+  haml :privacy
+end
+
 post '/signup' do
   data_requests = params[:'data-requests'] || []
 
