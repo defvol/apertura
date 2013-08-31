@@ -1,32 +1,32 @@
-%p.lead ¿Qué dato del gobierno te gustaría conocer?
+%p.lead= t('form.lead')
 
 %form(action="/signup" method="post" role="form")
   #data-requests
     .data-request
       .row
         .col-md-9
-          %input.form-control(name="data-requests[][description]" placeholder="Ej. Presupuesto para salud" type="text")
+          %input.form-control(name="data-requests[][description]" placeholder="#{t('form.request.example')}" type="text")
       .row
         .col-md-9
           %select.form-control(name="data-requests[][category]")
-            %option(value="" disabled selected) Categoría
-            %option Gasto público
-            %option Salud
-            %option Educación
-            %option Economía
-            %option Seguridad
-            %option Otro
+            %option(value="" disabled selected)= t('form.request.category.placeholder')
+            %option= t('form.request.category.one')
+            %option= t('form.request.category.two')
+            %option= t('form.request.category.three')
+            %option= t('form.request.category.four')
+            %option= t('form.request.category.five')
+            %option= t('form.request.category.other')
         .col-md-1
           %a#new-data-request(href="#" onclick="addDataRequest(this)")
             %i.glyphicon.glyphicon-plus
   #enrollment.form-inline.row
     .col-md-9
-      %input#email.form-control{name: "email", placeholder: "Correo electrónico", type: "text"}
+      %input#email.form-control{name: "email", placeholder: "#{t('form.email')}", type: "text"}
     .col-md-3
-      %button#signup-submit.btn.form-control{type:"submit"} Registrar
+      %button#signup-submit.btn.form-control{type:"submit"}= t('form.signup')
   .row
     .col-md-12
       - if flash[:error]
         %div#errors= flash[:error]
-      %p.disclaimer{style: "display:none;"} By signing up, you acknowledge and agree our terms and conditions
+      %p.disclaimer{style: "display:none;"}= t('form.disclaimer', :link => link_to("/privacidad", "#{request.host}/privacidad"))
 
