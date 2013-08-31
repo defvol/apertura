@@ -4,7 +4,10 @@ gem "sinatra"
 gem "thin"
 gem "mongo"
 gem "bson_ext"
-gem "mongo_mapper"
+
+# Fork v0.13.0.beta2 supporting Ruby 2.0
+# Check issue #473
+gem "mongo_mapper", :git => "git://github.com/wilhelmbot/mongomapper.git"
 
 gem "haml"
 gem 'rack-flash3'
