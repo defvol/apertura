@@ -13,7 +13,8 @@ var fillColor = d3.scale.ordinal()
 // Format
 
 var toCurrency = d3.format("$,.2f"),
-    toPercentage = d3.format(".2%");
+    toPercentage = d3.format(".2%"),
+    tickChangeFormat = d3.format("+%");
 
 // Layout
 
@@ -21,7 +22,8 @@ var width = 900,
     height = 300,
     center = { x: width / 2, y: height / 2 },
     radiusScale = d3.scale.pow().exponent(0.5).domain([0,1000000000000]).range([1,90]),
-    changeScale = d3.scale.linear().domain([-1,1]).range([300, 0]).clamp(true);
+    changeScale = d3.scale.linear().domain([-1,1]).range([300, 0]).clamp(true),
+    changeTickValues = [-0.25, 0, 0.25];
 
 // Render
 
@@ -56,6 +58,30 @@ function visualize() {
     .duration(750)
     .delay(function(d, i) { return i * 10 })
     .attr("r", function(d) { return radiusScale(d.presupuesto_2013) });
+
+  // Grid
+
+  d3.select("#overlay").style("height", height + "px");
+
+  for (var i=0; i < this.changeTickValues.length; i++) {
+    d3.select("#overlay").append("div")
+      .html("<p>"+this.tickChangeFormat(this.changeTickValues[i])+"</p>")
+      .style("top", this.changeScale(this.changeTickValues[i])+'px')
+      .style("width", width+'px')
+      .classed('tick', true)
+      .classed('zeroTick', this.changeTickValues[i] === 0);
+  };
+
+  var sources = {
+    2012: "http://www.transparenciapresupuestaria.gob.mx/ptp/ServletImagen?tipo=zip&idDoc=712",
+    2013: "http://www.transparenciapresupuestaria.gob.mx/ptp/ServletImagen?tipo=csv&idDoc=711"
+  };
+
+  var linkHtml = "<a href='http://www.transparenciapresupuestaria.gob.mx/ptp/contenidos/?id=16&group=Preguntas&page=%C2%BFPara%20qu%C3%A9%20gasta?'>Presupuesto de Egresos de la Federación</a>. SHCP. Año <a href='" + sources['2012'] + "'>2012</a> y <a href='" + sources['2013'] + "'>2013</a>"
+  $(".sources")
+    .html("<p>Fuente: " + linkHtml + "</p>")
+    .css("font-size", "0.8em")
+    .css("text-align", "center");
 
 }
 
