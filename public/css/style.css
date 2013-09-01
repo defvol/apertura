@@ -34,5 +34,29 @@ i {
   color: #b94a48;
 }
 
+.custom-tooltip {
+  padding-top: 10px;
+  text-align: left;
+}
 
+#overlay {
+  position: absolute;
+}
+
+.tick {
+  border-top: dashed 1px #999;
+  position: absolute;
+  z-index: 10;
+}
+
+.tick p {
+  font-size: 10px;
+  position: absolute;
+  left: -32px;
+  top: -8px;
+}
+
+.zeroTick {
+  border-top: dashed 1px #333;
+}
 
