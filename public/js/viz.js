@@ -39,7 +39,8 @@ function visualize() {
       .style("stroke-width", 0.8)
       .style("stroke", function(d) { return strokeColor(categorizeChange(d.cambio)) })
       .on("mouseover", function(d, i) { showDetails(d, i, this) })
-      .on("mouseout", function(d, i) { hideDetails(d, i, this) });
+      .on("mouseout", function(d, i) { hideDetails(d, i, this) })
+      .call(d3.behavior.drag().on("drag", move));
 
   circle.attr("cx", function(d, i) {
     var r = radiusScale(d.presupuesto_2013);
@@ -80,6 +81,12 @@ function hideDetails(d, i, element) {
   $(element).tooltip('hide');
   var color = strokeColor(categorizeChange(d.cambio));
   d3.select(element).style("stroke", color);
+}
+
+function move() {
+  var dragTarget = d3.select(this);
+  dragTarget
+    .attr("cx", function() { return d3.event.dx + parseInt(dragTarget.attr("cx")) });
 }
 
 // Helpers
