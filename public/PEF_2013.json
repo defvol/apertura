@@ -1,0 +1,226 @@
+{
+  "rows" : [
+    {
+      "ramo" : "Poder Legislativo",
+      "ejercido_2012" : 1.1781395665E10,
+      "presupuesto_2013" : 1.1948011682E10,
+      "cambio" : 0.014142298734179715
+    },
+    {
+      "ramo" : "Presidencia de la República",
+      "ejercido_2012" : 3.005156473E9,
+      "presupuesto_2013" : 2.104542836E9,
+      "cambio" : -0.2996894321781959
+    },
+    {
+      "ramo" : "Poder Judicial",
+      "ejercido_2012" : 3.9716381679E10,
+      "presupuesto_2013" : 4.6479491963E10,
+      "cambio" : 0.17028515685697498
+    },
+    {
+      "ramo" : "Gobernación",
+      "ejercido_2012" : 2.2908935604E10,
+      "presupuesto_2013" : 2.1041214804E10,
+      "cambio" : -0.08152804793226132
+    },
+    {
+      "ramo" : "Relaciones Exteriores",
+      "ejercido_2012" : 9.784370375E9,
+      "presupuesto_2013" : 6.947366858E9,
+      "cambio" : -0.28995258849244043
+    },
+    {
+      "ramo" : "Hacienda y Crédito Público",
+      "ejercido_2012" : 5.4016899477E10,
+      "presupuesto_2013" : 4.5557060687E10,
+      "cambio" : -0.156614668222528
+    },
+    {
+      "ramo" : "Defensa Nacional",
+      "ejercido_2012" : 6.1363841205E10,
+      "presupuesto_2013" : 6.0810570686E10,
+      "cambio" : -0.009016230212050669
+    },
+    {
+      "ramo" : "Agricultura, Ganadería, Desarrollo Rural, Pesca y Alimentación",
+      "ejercido_2012" : 6.8628413024E10,
+      "presupuesto_2013" : 7.5402528121E10,
+      "cambio" : 0.09870715055921564
+    },
+    {
+      "ramo" : "Comunicaciones y Transportes",
+      "ejercido_2012" : 8.0300619152E10,
+      "presupuesto_2013" : 8.6243898861E10,
+      "cambio" : 0.07401287526500933
+    },
+    {
+      "ramo" : "Economía",
+      "ejercido_2012" : 1.9907404507E10,
+      "presupuesto_2013" : 2.0383282538E10,
+      "cambio" : 0.02390457434230897
+    },
+    {
+      "ramo" : "Educación Pública",
+      "ejercido_2012" : 2.819603414711292E11,
+      "presupuesto_2013" : 2.60277219671E11,
+      "cambio" : -0.07690131770658748
+    },
+    {
+      "ramo" : "Salud",
+      "ejercido_2012" : 1.1273733180418024E11,
+      "presupuesto_2013" : 1.21856567399E11,
+      "cambio" : 0.08088922674398114
+    },
+    {
+      "ramo" : "Marina",
+      "ejercido_2012" : 2.1407159546320034E10,
+      "presupuesto_2013" : 2.1864854169E10,
+      "cambio" : 0.021380446186222146
+    },
+    {
+      "ramo" : "Trabajo y Previsión Social",
+      "ejercido_2012" : 4.360137179899988E9,
+      "presupuesto_2013" : 4.474889781E9,
+      "cambio" : 0.02631857585330466
+    },
+    {
+      "ramo" : "Reforma Agraria",
+      "ejercido_2012" : 5.351126713320008E9,
+      "presupuesto_2013" : 5.867839355E9,
+      "cambio" : 0.0965614662784553
+    },
+    {
+      "ramo" : "Medio Ambiente y Recursos Naturales",
+      "ejercido_2012" : 5.802398993941003E10,
+      "presupuesto_2013" : 5.6471236212E10,
+      "cambio" : -0.026760547301753035
+    },
+    {
+      "ramo" : "Procuraduría General de la República",
+      "ejercido_2012" : 1.3606680743579975E10,
+      "presupuesto_2013" : 1.5760503313E10,
+      "cambio" : 0.1582915488361305
+    },
+    {
+      "ramo" : "Energía",
+      "ejercido_2012" : 3.466139874512998E10,
+      "presupuesto_2013" : 2.334133445E9,
+      "cambio" : -0.9326589944576904
+    },
+    {
+      "ramo" : "Aportaciones a Seguridad Social",
+      "ejercido_2012" : 4.0544113874745996E11,
+      "presupuesto_2013" : 4.08730363557E11,
+      "cambio" : 0.008112706124744795
+    },
+    {
+      "ramo" : "Desarrollo Social",
+      "ejercido_2012" : 8.387895909775035E10,
+      "presupuesto_2013" : 9.5251838395E10,
+      "cambio" : 0.13558679577790178
+    },
+    {
+      "ramo" : "Turismo",
+      "ejercido_2012" : 7.743059540839999E9,
+      "presupuesto_2013" : 5.211426127E9,
+      "cambio" : -0.3269551784391105
+    },
+    {
+      "ramo" : "Instituto Federal Electoral",
+      "ejercido_2012" : 1.5594119512E10,
+      "presupuesto_2013" : 1.101984818E10,
+      "cambio" : -0.2933330944706434
+    },
+    {
+      "ramo" : "Provisiones Salariales y Económicas",
+      "ejercido_2012" : 8.583761063225E10,
+      "presupuesto_2013" : 7.7112133718E10,
+      "cambio" : -0.10165097618609342
+    },
+    {
+      "ramo" : "Deuda Pública",
+      "ejercido_2012" : 2.5235046959711002E11,
+      "presupuesto_2013" : 2.81516074809E11,
+      "cambio" : 0.11557579131298756
+    },
+    {
+      "ramo" : "Previsiones y Aportaciones para los Sistemas de Educación Básica, Normal, Tecnológica y de Adultos",
+      "ejercido_2012" : 3.378373957810002E10,
+      "presupuesto_2013" : 4.323190425E10,
+      "cambio" : 0.27966604022796404
+    },
+    {
+      "ramo" : "Función Pública",
+      "ejercido_2012" : 1.7043730162500014E9,
+      "presupuesto_2013" : 1.392873286E9,
+      "cambio" : -0.18276499761499976
+    },
+    {
+      "ramo" : "Participaciones a Entidades Federativas y Municipios",
+      "ejercido_2012" : 4.9426453239E11,
+      "presupuesto_2013" : 5.35115532E11,
+      "cambio" : 0.08265007285160908
+    },
+    {
+      "ramo" : "Adeudos de Ejercicios Fiscales Anteriores",
+      "ejercido_2012" : 2.08200083177E10,
+      "presupuesto_2013" : 1.5084010538E10,
+      "cambio" : -0.27550410605857334
+    },
+    {
+      "ramo" : "Tribunales Agrarios",
+      "ejercido_2012" : 8.80101073260001E8,
+      "presupuesto_2013" : 9.91998347E8,
+      "cambio" : 0.12714138993776936
+    },
+    {
+      "ramo" : "Tribunal Federal de Justicia Fiscal y Administrativa",
+      "ejercido_2012" : 2.0821413484600005E9,
+      "presupuesto_2013" : 2.13818373E9,
+      "cambio" : 0.02691574305531641
+    },
+    {
+      "ramo" : "Aportaciones Federales para Entidades Federativas y Municipios",
+      "ejercido_2012" : 5.0051608912846027E11,
+      "presupuesto_2013" : 5.1390353203E11,
+      "cambio" : 0.02674727784445663
+    },
+    {
+      "ramo" : "Erogaciones para los Programas de Apoyo a Ahorradores y Deudores de la Banca",
+      "ejercido_2012" : 1.332950589034E10,
+      "presupuesto_2013" : 1.35786007E10,
+      "cambio" : 0.018687475117927788
+    },
+    {
+      "ramo" : "Comisión Nacional de los Derechos Humanos",
+      "ejercido_2012" : 1.2465655926799986E9,
+      "presupuesto_2013" : 1.37512722E9,
+      "cambio" : 0.10313266151009826
+    },
+    {
+      "ramo" : "Seguridad Pública",
+      "ejercido_2012" : 4.916583852863008E10,
+      "presupuesto_2013" : 4.1217172226E10,
+      "cambio" : -0.16167051230096363
+    },
+    {
+      "ramo" : "Consejería Jurídica del Ejecutivo Federal",
+      "ejercido_2012" : 1.1567336638E8,
+      "presupuesto_2013" : 1.23764294E8,
+      "cambio" : 0.06994633140891215
+    },
+    {
+      "ramo" : "Consejo Nacional de Ciencia y Tecnología",
+      "ejercido_2012" : 1.8827117375800003E10,
+      "presupuesto_2013" : 2.5245962047E10,
+      "cambio" : 0.34093613711946413
+    },
+    {
+      "ramo" : "Información Nacional Estadística y Geográfica",
+      "ejercido_2012" : 5.228398442E9,
+      "presupuesto_2013" : 5.429182914E9,
+      "cambio" : 0.03840267229580041
+    }
+  ]
+}

@@ -34,5 +34,8 @@ i {
   color: #b94a48;
 }
 
-
+.custom-tooltip {
+  padding-top: 10px;
+  text-align: left;
+}
 

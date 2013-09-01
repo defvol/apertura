@@ -29,16 +29,18 @@
   .container
     = yield
   %footer
-  /! end of #container
+    #viz(style="margin: 0 auto; width: 900px;")
 
   %script{'src' => '//code.jquery.com/jquery-1.10.2.min.js'}
   %script
     window.jQuery || document.write('<script src="js/libs/jquery-1.10.2.min.js"><\/script>')
 
   / scripts concatenated and minified via ant build script
-  %script{'defer' => true, 'src' => 'js/plugins.js'}
-  %script{'defer' => true, 'src' => 'js/script.js'}
   %script{'src' => 'js/libs/bootstrap.min.js'}
+  %script{'src' => 'js/libs/d3.min.js'}
+  %script{'defer' => true, 'src' => 'js/plugins.js'}
+  %script{'defer' => true, 'src' => 'js/viz.js'}
+  %script{'defer' => true, 'src' => 'js/script.js'}
   / end scripts
 
   / Change UA-XXXXX-X to be your site's ID
