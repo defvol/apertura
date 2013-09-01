@@ -84,9 +84,13 @@ function hideDetails(d, i, element) {
 }
 
 function move() {
-  var dragTarget = d3.select(this);
-  dragTarget
-    .attr("cx", function() { return d3.event.dx + parseInt(dragTarget.attr("cx")) });
+  var dragTarget = d3.select(this),
+      newPosition = parseInt(dragTarget.attr("cx")) + d3.event.dx,
+      radius = parseInt(dragTarget.attr("r"));
+
+  // Keep inside the box
+  if (newPosition - radius > 0 && newPosition + radius < width)
+    dragTarget.attr("cx", function() { return newPosition });
 }
 
 // Helpers
