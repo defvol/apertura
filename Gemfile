@@ -22,5 +22,8 @@ group :test do
   gem 'rake'
   gem 'rack-test'
   gem 'capybara'
-  gem 'selenium-webdriver'
+  # Fixes http://stackoverflow.com/questions/18555992/bundle-exec-rspec-spec-requests-static-pages-spec-rb-from-hartls-tutorial-isnt
+  gem 'rubyzip', '< 1.0.0'
+  # Fixes http://stackoverflow.com/questions/18114544/seleniumwebdrivererrorjavascripterror-waiting-for-evaluate-js-load-failed
+  gem 'selenium-webdriver', '~> 2.34.0'
 end

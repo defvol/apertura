@@ -29,3 +29,13 @@ function removeDataRequest(e) {
   return false;
 }
 
+function addDataCategory(sel) {
+  var selectedOption = $(sel).find(":selected").first()[0];
+  var otherCategory = $(sel).find("option.other").first()[0];
+  if (selectedOption === otherCategory) {
+    var answer = prompt("Sugiere una nueva categoría");
+    if (_.isEmpty(answer) === false)
+      $(otherCategory).text(answer);
+  }
+}
+
