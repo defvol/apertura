@@ -8,14 +8,14 @@
           %input.form-control(name="data-requests[][description]" placeholder="#{t('form.request.example')}" type="text")
       .row
         .col-md-9
-          %select.form-control(name="data-requests[][category]")
+          %select.form-control(name="data-requests[][category]" onchange="addDataCategory(this)")
             %option(value="" disabled selected)= t('form.request.category.placeholder')
             %option= t('form.request.category.one')
             %option= t('form.request.category.two')
             %option= t('form.request.category.three')
             %option= t('form.request.category.four')
             %option= t('form.request.category.five')
-            %option= t('form.request.category.other')
+            %option.other= t('form.request.category.other')
         .col-md-1
           %a#new-data-request(href="#" onclick="addDataRequest(this)")
             %i.glyphicon.glyphicon-plus
