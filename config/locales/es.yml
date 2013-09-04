@@ -10,11 +10,13 @@ es:
       example: Ej. Presupuesto para salud
       category:
         placeholder: Categoría
-        one: Gasto Público
-        two: Salud
-        three: Educación
-        four: Economía
-        five: Seguridad
+        one: Salud
+        two: Educación
+        three: Economía
+        four: Seguridad
+        five: Medio ambiente
+        six: Migración
+        seven: Gasto público
         other: Otro
     signup: Registrar
   layout:
