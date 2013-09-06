@@ -23,6 +23,13 @@ es:
     title: DATOS.GOB.MX
     header: DATOS.GOB.MX
     tagline: Transforma el gobierno
+  mongo_mapper:
+    attributes:
+      user:
+        email: "Correo electrónico"
+    errors:
+      messages:
+        taken: "fue registrado anteriormente"
   privacy:
     title: Leyenda de Información del Portal Datos Abiertos
     terms: |
