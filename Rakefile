@@ -26,5 +26,13 @@ namespace :test do
     task("acceptance").execute
   end
 
+  desc "Run API tests"
+  task :api do
+    test_task = Rake::TestTask.new("api") do |t|
+      t.test_files = Dir.glob(File.join("test", "api_test.rb"))
+    end
+    task("api").execute
+  end
+
 end
 

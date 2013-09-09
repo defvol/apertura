@@ -13,6 +13,28 @@ class User
       errors.add(:email, "no es correcto")
     end
   end
+
+  def self.data_requests
+    User.collection.aggregate([
+      { "$unwind" => "$data_requests" },
+      { "$project" => {
+          "_id" => 0,
+          "created_at" => 1,
+          "category" => "$data_requests.category"
+        }}
+    ])
+  end
+
+  def self.data_requests_by_category
+    User.collection.aggregate([
+      { "$unwind" => "$data_requests" },
+      { "$group" => {
+          _id: "$data_requests.category",
+          count: { "$sum" => 1 } } },
+      { "$project" => { "category" => "$_id", "count" => 1, "_id" => 0 } }
+    ])
+  end
+
 end
 
 class DataRequest
