@@ -5,9 +5,8 @@ gem "thin"
 gem "mongo"
 gem "bson_ext"
 
-# Fork v0.13.0.beta2 supporting Ruby 2.0
-# Check issue #473
-gem "mongo_mapper", :git => "git://github.com/wilhelmbot/mongomapper.git"
+# Fork v0.13.0.beta2 supporting Ruby 2.0 (check issue #473)
+gem "mongo_mapper", "0.13.0.beta2"
 
 gem "haml"
 gem 'rack-flash3'
