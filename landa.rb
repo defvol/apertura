@@ -68,5 +68,11 @@ post '/signup' do
   end
 end
 
+get '/requests.json' do
+  User.data_requests.to_json
+end
 
+get '/categories.json' do
+  User.data_requests_by_category.to_json
+end
 
