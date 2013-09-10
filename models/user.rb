@@ -35,6 +35,24 @@ class User
     ])
   end
 
+  def self.data_requests_by_day
+    User.collection.aggregate([
+      { "$unwind" => "$data_requests" },
+      { "$project" => {
+        "category" => "$data_requests.category",
+        "day" => { "$dayOfYear" => "$created_at" },
+        "_id" => 0 } },
+      { "$group" => {
+          _id: { category: "$category", day: "$day" },
+          count: { "$sum" => 1 } } },
+      { "$project" => {
+            "category" => "$_id.category",
+            "count" => 1,
+            "day" => "$_id.day",
+            "_id" => 0 } }
+    ])
+  end
+
 end
 
 class DataRequest
