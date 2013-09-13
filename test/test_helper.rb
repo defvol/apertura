@@ -12,12 +12,16 @@ class Test::Unit::TestCase
   end
 
   def delete_some_user
-    some_user = User.find_by_email(some_email)
-    some_user.delete if some_user
+    delete_user_with_email(some_user.email)
   end
 
   def some_user
     User.find_by_email(some_email)
+  end
+
+  def delete_user_with_email(email)
+    user = User.find_by_email(email)
+    user.delete if user
   end
 
   def signup_with_email(email)
