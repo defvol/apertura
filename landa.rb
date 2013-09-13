@@ -76,3 +76,7 @@ get '/categories.json' do
   User.data_requests_by_category.to_json
 end
 
+get '/daily.json' do
+  User.data_requests_by_day.to_json
+end
+
