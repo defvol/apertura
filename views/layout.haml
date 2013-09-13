@@ -15,6 +15,8 @@
   / CSS concatenated and minified via ant build script
   %link{'rel' => 'stylesheet', 'href' => 'css/bootstrap.min.css'}/
   %link{'rel' => 'stylesheet', 'href' => 'css/bootstrap-theme.min.css'}/
+  %link{'rel' => 'stylesheet', 'href' => 'http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600', 'type' => 'text/css'}/
+  %link{'rel' => 'stylesheet', 'href' => 'http://fonts.googleapis.com/css?family=Abel', 'type' => 'text/css'}/
   %link{'rel' => 'stylesheet', 'href' => 'css/layout.css'}/
   %link{'rel' => 'stylesheet', 'href' => 'css/style.css'}/
   / end CSS
@@ -25,6 +27,7 @@
   %header
     .container
       %h1= t('layout.header')
+      %hr
       %h3= t('layout.tagline')
   .container
     = yield
