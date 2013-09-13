@@ -7,7 +7,7 @@ var n = 20, // number of layers
     layers0 = stack(d3.range(n).map(function() { return bumpLayer(m); })),
     layers1 = stack(d3.range(n).map(function() { return bumpLayer(m); }));
 
-var width = 960,
+var width = document.body.clientWidth,
     height = 500;
 
 var x = d3.scale.linear()
