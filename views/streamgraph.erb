@@ -14,10 +14,21 @@ function visualizeit() {
   samples = _.max(layers, function(layer) { return layer.values.length }).values.length;
   layers = fillMissingDays(layers);
 
+  var colors = {
+    "Salud":          "#00a6fc",
+    "Migración":      "#23203f",
+    "Educación":      "#00a79f",
+    "Gasto público":  "#7b00ff",
+    "Seguridad":      "#ffd700",
+    "Economía":       "#32516c",
+    "Medio ambiente": "#c8e547",
+    "Otro":           "#9eabb6"
+  };
+
   // Setup style and layout
   var width = document.body.clientWidth,
       height = 500,
-      color = d3.scale.linear().range(["#aad", "#556"]);
+      color = d3.scale.ordinal().domain(_.keys(colors)).range(_.values(colors));
 
   // Setup graph
   var x = d3.scale.linear()
@@ -46,7 +57,31 @@ function visualizeit() {
       .data(stack(layers))
       .enter().append("path")
       .attr("d", function(d) { return area(d.values) })
-      .style("fill", function() { return color(Math.random()) });
+      .style("fill", function(d) { return color(d.key) });
+
+  var legend = svg.append("g")
+    .attr("class", "legend")
+    .attr("transform", "translate(-40," + (height - 50) + ")")
+    .style("font-size","12px");
+
+  var r = 6;
+
+  legend.selectAll('circle')
+    .data(layers)
+    .enter()
+    .append("circle")
+    .attr("r", r)
+    .attr("cx", function(d, i) { return width - (100 * (i + 1)) })
+    .attr("cy", function(d, i) { return 0 })
+    .style("fill", function(d) { return color(d.key) });
+
+  legend.selectAll('text')
+    .data(layers)
+    .enter()
+    .append("text")
+    .attr("x", function(d, i) { return width - (100 * (i + 1)) + 15 })
+    .attr("y", function(d, i) { return r })
+    .text(function(d) { return d.key });
 };
 
 d3.json("/daily.json", function(error, json) {
