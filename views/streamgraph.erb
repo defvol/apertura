@@ -1,70 +1,72 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var n = 20, // number of layers
-    m = 200, // number of samples per layer
-    stack = d3.layout.stack().offset("wiggle"),
-    layers0 = stack(d3.range(n).map(function() { return bumpLayer(m); })),
-    layers1 = stack(d3.range(n).map(function() { return bumpLayer(m); }));
+var data, samples;
+var beginning, ending;
+var nest = d3.nest().key(function(d) { return d.category; });
 
-var width = document.body.clientWidth,
-    height = 500;
+function visualizeit() {
+  // Setup data
+  beginning = _.min(data, function(o) { return o.day }).day,
+  ending    = _.max(data, function(o) { return o.day }).day;
+  var maxCount = _.max(data, function(o) { return o.count }).count;
+  var layers = nest.entries(data);
+  samples = _.max(layers, function(layer) { return layer.values.length }).values.length;
+  layers = fillMissingDays(layers);
 
-var x = d3.scale.linear()
-    .domain([0, m - 1])
-    .range([0, width]);
+  // Setup style and layout
+  var width = document.body.clientWidth,
+      height = 500,
+      color = d3.scale.linear().range(["#aad", "#556"]);
 
-var y = d3.scale.linear()
-    .domain([0, d3.max(layers0.concat(layers1), function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); })])
-    .range([height, 0]);
+  // Setup graph
+  var x = d3.scale.linear()
+        .domain([beginning, ending])
+        .range([0, width]),
+      y = d3.scale.linear()
+        .domain([0, maxCount])
+        .range([0, height/2]);
 
-var color = d3.scale.linear()
-    .range(["#aad", "#556"]);
+  var stack = d3.layout.stack()
+        .offset("wiggle")
+        .values(function(d) { return d.values })
+        .x(function(d) { return d.day })
+        .y(function(d) { return d.count });
 
-var area = d3.svg.area()
-    .x(function(d) { return x(d.x); })
-    .y0(function(d) { return y(d.y0); })
-    .y1(function(d) { return y(d.y0 + d.y); });
+  var area = d3.svg.area()
+    .x(function(d)  { return x(d.day) })
+    .y0(function(d) { return y(d.y0) })
+    .y1(function(d) { return y(d.y0 + d.y) });
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+  var svg = d3.select("#graph").append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-svg.selectAll("path")
-    .data(layers0)
-  .enter().append("path")
-    .attr("d", area)
-    .style("fill", function() { return color(Math.random()); });
+  svg.selectAll("path")
+      .data(stack(layers))
+      .enter().append("path")
+      .attr("d", function(d) { return area(d.values) })
+      .style("fill", function() { return color(Math.random()) });
+};
 
-function transition() {
-  d3.selectAll("path")
-      .data(function() {
-        var d = layers1;
-        layers1 = layers0;
-        return layers0 = d;
-      })
-    .transition()
-      .duration(2500)
-      .attr("d", area);
-}
+d3.json("/daily.json", function(error, json) {
+  if (error) return console.warn(error);
+  data = json;
+  visualizeit();
+});
 
-// Inspired by Lee Byron's test data generator.
-function bumpLayer(n) {
+function fillMissingDays(layers) {
+  _.each(layers, function(layer) {
+    var rangeOfDays = _.range(beginning, ending + 1);
+    var daysInLayer = _.pluck(layer.values, 'day');
+    var missingDays = _.difference(rangeOfDays, daysInLayer);
+    _.each(missingDays, function(day) {
+      layer.values.push({ category: _.last(layer.values).category, count: 0, day: day });
+    });
+    layer.values = _.sortBy(layer.values, function (value) { return value.day });
+  });
 
-  function bump(a) {
-    var x = 1 / (.1 + Math.random()),
-        y = 2 * Math.random() - .5,
-        z = 10 / (.1 + Math.random());
-    for (var i = 0; i < n; i++) {
-      var w = (i / n - y) * z;
-      a[i] += x * Math.exp(-w * w);
-    }
-  }
-
-  var a = [], i;
-  for (i = 0; i < n; ++i) a[i] = 0;
-  for (i = 0; i < 5; ++i) bump(a);
-  return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
+  return layers;
 }
 
 </script>

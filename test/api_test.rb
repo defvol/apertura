@@ -69,6 +69,11 @@ class ApiTest < Test::Unit::TestCase
     get '/daily.json'
     response = [
       {
+        count: 2,
+        category: @requests[0][:category],
+        day: @user.created_at.yday
+      },
+      {
         count: 1,
         category: @requests[2][:category],
         day: @early_adopter.created_at.yday
@@ -76,11 +81,6 @@ class ApiTest < Test::Unit::TestCase
       {
         count: 1,
         category: @requests[2][:category],
-        day: @user.created_at.yday
-      },
-      {
-        count: 2,
-        category: @requests[0][:category],
         day: @user.created_at.yday
       }
     ]
