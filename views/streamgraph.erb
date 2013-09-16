@@ -64,6 +64,8 @@ function visualizeit() {
     .attr("transform", "translate(-40," + (height - 50) + ")")
     .style("font-size","12px");
 
+  // Legend
+
   var r = 6;
 
   legend.selectAll('circle')
@@ -82,6 +84,56 @@ function visualizeit() {
     .attr("x", function(d, i) { return width - (100 * (i + 1)) + 15 })
     .attr("y", function(d, i) { return r })
     .text(function(d) { return d.key });
+
+  // Fancy interactivity
+  // Based on http://bl.ocks.org/WillTurman/4631136
+
+  // Tooltip
+  var tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 1e-6);
+
+  var selectedEvent;
+
+  svg.selectAll("path")
+    .attr("opacity", 1)
+
+    .on("mouseover", function(d, i) {
+      svg.selectAll("path").transition()
+        .duration(250)
+        .attr("opacity", function(d, j) { return j != i ? 0.6 : 1 });
+      tooltip.transition()
+        .duration(500)
+        .style("opacity", 1);
+    })
+
+    .on("mousemove", function(d, i) {
+      var mouseX = d3.mouse(this)[0];
+      selectedEvent = _.find(d.values, function(o) {
+        return o.day == Math.floor(x.invert(mouseX));
+      });
+      var strokeColor = d3.rgb(color(selectedEvent.category)).darker();
+      d3.select(this)
+        .classed("hover", true)
+        .attr("stroke", strokeColor)
+        .attr("stroke-width", "0.5px");
+      tooltip.text(d.key + ": " + selectedEvent.count)
+        .style("left", (d3.event.pageX - 34) + "px")
+        .style("top", (d3.event.pageY - 12) + "px");
+    })
+
+    .on("mouseout", function(d, i) {
+      svg.selectAll("path")
+        .transition()
+        .duration(250)
+        .attr("opacity", "1");
+      d3.select(this)
+        .classed("hover", false)
+        .attr("stroke-width", "0px");
+      tooltip.transition()
+        .duration(500)
+        .style("opacity", 1e-6);
+    });
 };
 
 d3.json("/daily.json", function(error, json) {

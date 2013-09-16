@@ -43,5 +43,12 @@ i {
   color: #b94a48;
 }
 
+/* Graph */
+
 g.legend text { text-transform: uppercase; }
+
+div.tooltip {
+  position: absolute;
+  pointer-events: none;
+}
 
