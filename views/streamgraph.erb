@@ -59,6 +59,36 @@ function visualizeit() {
       .attr("d", function(d) { return area(d.values) })
       .style("fill", function(d) { return color(d.key) });
 
+  // X axis
+
+  var now = new Date();
+  var beginningDate = new Date(now.getFullYear(), 0, beginning);
+  var endingDate = new Date(now.getFullYear(), 0, ending);
+  var timeScale = d3.time.scale()
+      .domain([beginningDate, d3.time.day.offset(endingDate, 1)])
+      .rangeRound([10, width-10]);
+
+  var xAxis = d3.svg.axis()
+      .scale(timeScale)
+      .orient('bottom')
+      .ticks(d3.time.days, 1)
+      .tickFormat(d3.time.format('%d/%m'))
+      .tickSize(4)
+      .tickPadding(8);
+
+  svg.append('g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0, ' + (height - 40) + ')')
+      .call(xAxis)
+    .selectAll("text")
+      .attr("y", 0)
+      .attr("x", 9)
+      .attr("dy", ".35em")
+      .attr("transform", "rotate(90)")
+      .style("text-anchor", "start");
+
+  // Legend
+
   var legendHeight = 40;
   var legend = d3.select("#graph").append("svg")
       .attr("height", legendHeight)
@@ -66,8 +96,6 @@ function visualizeit() {
         .attr("class", "legend")
         .attr("transform", "translate(-" + (width / 2) + ", " + legendHeight / 2 + ")")
         .style("font-size","12px");
-
-  // Legend
 
   var r = 6, spaceBetween = 12, startingPosition = width;
 
