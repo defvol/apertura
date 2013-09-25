@@ -16,7 +16,7 @@ class Test::Unit::TestCase
   end
 
   def some_user
-    User.find_by_email(some_email)
+    User.find_or_create_by_email(some_email)
   end
 
   def delete_user_with_email(email)

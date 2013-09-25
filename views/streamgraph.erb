@@ -1,0 +1,196 @@
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var data, samples;
+var beginning, ending;
+var nest = d3.nest().key(function(d) { return d.category; });
+
+function visualizeit() {
+  // Setup data
+  beginning = _.min(data, function(o) { return o.day }).day,
+  ending    = _.max(data, function(o) { return o.day }).day;
+  var maxCount = _.max(data, function(o) { return o.count }).count;
+  var layers = nest.entries(data);
+  samples = _.max(layers, function(layer) { return layer.values.length }).values.length;
+  layers = fillMissingDays(layers);
+
+  var colors = {
+    "Salud":          "#00a6fc",
+    "Migración":      "#23203f",
+    "Educación":      "#00a79f",
+    "Gasto público":  "#7b00ff",
+    "Seguridad":      "#ffd700",
+    "Economía":       "#32516c",
+    "Medio ambiente": "#c8e547",
+    "Otro":           "#9eabb6"
+  };
+
+  // Setup style and layout
+  var width = document.body.clientWidth,
+      height = 500,
+      color = d3.scale.ordinal().domain(_.keys(colors)).range(_.values(colors));
+
+  // Setup graph
+  var x = d3.scale.linear()
+        .domain([beginning, ending])
+        .range([0, width]),
+      y = d3.scale.linear()
+        .domain([0, maxCount])
+        .range([0, height/2]);
+
+  var stack = d3.layout.stack()
+        .offset("wiggle")
+        .values(function(d) { return d.values })
+        .x(function(d) { return d.day })
+        .y(function(d) { return d.count });
+
+  var area = d3.svg.area()
+    .x(function(d)  { return x(d.day) })
+    .y0(function(d) { return y(d.y0) })
+    .y1(function(d) { return y(d.y0 + d.y) });
+
+  var svg = d3.select("#graph").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+  svg.selectAll("path")
+      .data(stack(layers))
+      .enter().append("path")
+      .attr("d", function(d) { return area(d.values) })
+      .style("fill", function(d) { return color(d.key) });
+
+  // X axis
+
+  var now = new Date();
+  var beginningDate = new Date(now.getFullYear(), 0, beginning);
+  var endingDate = new Date(now.getFullYear(), 0, ending);
+  var timeScale = d3.time.scale()
+      .domain([beginningDate, d3.time.day.offset(endingDate, 1)])
+      .rangeRound([10, width-10]);
+
+  var xAxis = d3.svg.axis()
+      .scale(timeScale)
+      .orient('bottom')
+      .ticks(d3.time.days, 1)
+      .tickFormat(d3.time.format('%d/%m'))
+      .tickSize(4)
+      .tickPadding(8);
+
+  svg.append('g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0, ' + (height - 40) + ')')
+      .call(xAxis)
+    .selectAll("text")
+      .attr("y", 0)
+      .attr("x", 9)
+      .attr("dy", ".35em")
+      .attr("transform", "rotate(90)")
+      .style("text-anchor", "start");
+
+  // Legend
+
+  var legendHeight = 40;
+  var legend = d3.select("#graph").append("svg")
+      .attr("height", legendHeight)
+      .append("g")
+        .attr("class", "legend")
+        .attr("transform", "translate(-" + (width / 2) + ", " + legendHeight / 2 + ")")
+        .style("font-size","12px");
+
+  var r = 6, spaceBetween = 12, startingPosition = width;
+
+  legend.selectAll('text')
+    .data(layers)
+    .enter()
+    .append("text")
+    .text(function(d) { return d.key })
+    .attr("x", function(d, i) {
+      var previous = $("g.legend text")[i - 1];
+      if (_.isUndefined(previous) === false)
+        startingPosition += previous.getBBox().width + spaceBetween + r * 2;
+      return startingPosition })
+    .attr("y", function(d, i) { return r / 2 });
+
+  legend.selectAll('circle')
+    .data(layers)
+    .enter()
+    .append("circle")
+    .attr("r", r)
+    .attr("cx", function(d, i) {
+      return $("g.legend text")[i].getBBox().x - r * 2 })
+    .attr("cy", function(d, i) { return 0 })
+    .style("fill", function(d) { return color(d.key) });
+
+  // Fancy interactivity
+  // Based on http://bl.ocks.org/WillTurman/4631136
+
+  // Tooltip
+  var tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 1e-6);
+
+  var selectedEvent;
+
+  svg.selectAll("path")
+    .attr("opacity", 1)
+
+    .on("mouseover", function(d, i) {
+      svg.selectAll("path").transition()
+        .duration(250)
+        .attr("opacity", function(d, j) { return j != i ? 0.6 : 1 });
+      tooltip.transition()
+        .duration(500)
+        .style("opacity", 1);
+    })
+
+    .on("mousemove", function(d, i) {
+      var mouseX = d3.mouse(this)[0];
+      selectedEvent = _.find(d.values, function(o) {
+        return o.day == Math.floor(x.invert(mouseX));
+      });
+      var strokeColor = d3.rgb(color(selectedEvent.category)).darker();
+      d3.select(this)
+        .classed("hover", true)
+        .attr("stroke", strokeColor)
+        .attr("stroke-width", "0.5px");
+      tooltip.text(d.key + ": " + selectedEvent.count)
+        .style("left", (d3.event.pageX - 34) + "px")
+        .style("top", (d3.event.pageY - 12) + "px");
+    })
+
+    .on("mouseout", function(d, i) {
+      svg.selectAll("path")
+        .transition()
+        .duration(250)
+        .attr("opacity", "1");
+      d3.select(this)
+        .classed("hover", false)
+        .attr("stroke-width", "0px");
+      tooltip.transition()
+        .duration(500)
+        .style("opacity", 1e-6);
+    });
+};
+
+d3.json("/daily.json", function(error, json) {
+  if (error) return console.warn(error);
+  data = json;
+  visualizeit();
+});
+
+function fillMissingDays(layers) {
+  _.each(layers, function(layer) {
+    var rangeOfDays = _.range(beginning, ending + 1);
+    var daysInLayer = _.pluck(layer.values, 'day');
+    var missingDays = _.difference(rangeOfDays, daysInLayer);
+    _.each(missingDays, function(day) {
+      layer.values.push({ category: _.last(layer.values).category, count: 0, day: day });
+    });
+    layer.values = _.sortBy(layer.values, function (value) { return value.day });
+  });
+
+  return layers;
+}
+
+</script>
+

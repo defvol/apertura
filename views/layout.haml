@@ -22,6 +22,7 @@
   / end CSS
 
   %script{'src' => 'js/libs/modernizr-2.0.6.min.js'}
+  %script{'src' => 'js/libs/underscore-min.js'}
 
 %body
   %header
@@ -29,13 +30,11 @@
       %h1= t('layout.header')
       %hr
       %h3= t('layout.tagline')
-  .container
-    = yield
+  = yield
   %footer
   /! end of #container
 
   %script{'src' => '//code.jquery.com/jquery-1.10.2.min.js'}
-  %script{'src' => 'js/libs/underscore-min.js'}
   %script
     window.jQuery || document.write('<script src="js/libs/jquery-1.10.2.min.js"><\/script>')
 
