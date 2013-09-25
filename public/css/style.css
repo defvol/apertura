@@ -43,5 +43,23 @@ i {
   color: #b94a48;
 }
 
+/* Graph */
 
+g.legend text { text-transform: uppercase; }
+
+div.tooltip {
+  position: absolute;
+  pointer-events: none;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
 

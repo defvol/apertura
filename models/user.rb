@@ -49,7 +49,8 @@ class User
             "category" => "$_id.category",
             "count" => 1,
             "day" => "$_id.day",
-            "_id" => 0 } }
+            "_id" => 0 } },
+      { "$sort" => { "category" => 1, "day" => 1 } }
     ])
   end
 
