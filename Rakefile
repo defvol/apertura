@@ -59,7 +59,7 @@ namespace :db do
     puts "Seeding #{count} records to database at #{MongoMapper.database.name}"
 
     (0...count).each do |e|
-      user = User.new(email: random_email, data_requests: [random_request])
+      user = User.new(email: random_email, data_requests: [random_request], seed: true)
       user.save(:safe => true)
       # Fake registration date
       user.created_at = random_date
