@@ -11,10 +11,11 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+.DS_Store
+.env
 
 # YARD artifacts
 .yardoc
 _yardoc
 doc/
 
-.DS_Store
