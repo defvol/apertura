@@ -13,7 +13,7 @@ input, select, i {
 
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 480px;
+    max-width: 700px;
   }
 
   header {
@@ -27,5 +27,17 @@ input, select, i {
 
 @media screen and (max-width: 480px) {
   p { font-size: 12px; }
+}
+
+/* Header */
+
+.logo {
+  float: left;
+  height: 180px; /* Hack to keep text alignment after resizing */
+}
+
+.logo img {
+  width: 80px;
+  margin-top: 40px;
 }
 
