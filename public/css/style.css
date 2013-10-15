@@ -7,6 +7,15 @@ body {
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+header {
+  background-color: #333333;
+  color: white;
+}
+
+header p {
+  font-weight: 100;
+}
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "Abel","Helvetica Neue",Helvetica,Arial,sans-serif;
 }

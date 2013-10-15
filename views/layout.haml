@@ -26,10 +26,12 @@
 
 %body
   %header
+    .logo
+      %a{'href' => '/'}
+        %img{'src' => 'img/logo.png'}
     .container
       %h1= t('layout.header')
-      %hr
-      %h3= t('layout.tagline')
+      %p= t('layout.about_html')
   = yield
   %footer
   /! end of #container
