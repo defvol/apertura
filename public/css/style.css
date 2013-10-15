@@ -2,9 +2,18 @@
 /* Style */
 
 body {
-  background-color: #f0f0ee;
+  background-color: #F2F2F2;
   color: #000;
-  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+header {
+  background-color: #333333;
+  color: white;
+}
+
+p {
+  font-weight: 300;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -41,6 +50,10 @@ i {
 
 #errors {
   color: #b94a48;
+}
+
+p.lead {
+  font-style: italic;
 }
 
 /* Graph */
