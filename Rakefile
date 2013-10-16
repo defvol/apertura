@@ -77,6 +77,17 @@ namespace :db do
     puts "#{count} objects saved"
   end
 
+  desc "Seed database with poll answers"
+  task :seed_poll do
+    require "csv"
+    rows = CSV.read("seed.csv", { :col_sep => "|" })
+    rows.shift # remove header row
+    rows.each do |row|
+      Option.create(pseudo_uid: row[0], parent_uid: row[1], text: row[2])
+    end
+    puts "Saved #{rows.length} entries"
+  end
+
 end
 
 # Some helpers
