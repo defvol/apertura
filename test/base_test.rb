@@ -51,5 +51,11 @@ class BaseTest < Test::Unit::TestCase
     assert_equal 1, user.data_requests.last.errors.size
   end
 
+  def test_answer_form_submit
+    count_before = Answer.count
+    post '/answers', { selected: '1' }
+    assert_equal count_before + 1, Answer.count
+  end
+
 end
 

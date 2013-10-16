@@ -39,5 +39,13 @@ class Test::Unit::TestCase
         #{function_name} = function() { return '#{return_value}' };
     JAVASCRIPT
   end
+
+  def set_some_poll_options
+    Option.delete_all
+    Option.create(pseudo_uid: 1, text: "Lorem ipsum")
+    Option.create(pseudo_uid: 100, parent_uid: 1, text: "Echo Park kitsch readymade")
+    Option.create(pseudo_uid: 101, parent_uid: 1, text: "Lo-fi post-ironic et")
+    Option.all
+  end
 end
 

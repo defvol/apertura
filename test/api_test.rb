@@ -87,5 +87,17 @@ class ApiTest < Test::Unit::TestCase
     assert_equal response.to_json, last_response.body
   end
 
+  def test_it_gets_first_options
+    set_some_poll_options
+    get '/options.json'
+    assert_equal Option.where(:parent_uid.exists => false).all.to_json, last_response.body
+  end
+
+  def test_it_gets_options_for_a_parent_uid
+    set_some_poll_options
+    get '/options/1.json'
+    assert_equal Option.where(parent_uid: 1).all.to_json, last_response.body
+  end
+
 end
 

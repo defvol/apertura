@@ -5,7 +5,6 @@ es:
   form:
     disclaimer: Al registrarte confirmas estar de acuerdo con nuestra leyenda de privacidad ubicada en %{link}
     email: Correo electrónico
-    lead: ¿Qué dato del gobierno te gustaría conocer?
     request:
       example: Ej. Presupuesto para salud
       category:
@@ -31,6 +30,8 @@ es:
     errors:
       messages:
         taken: "fue registrado anteriormente"
+  poll:
+    lead: ¿Qué dato del gobierno te gustaría conocer?
   privacy:
     title: Leyenda de Información del Portal Datos Abiertos
     terms: |

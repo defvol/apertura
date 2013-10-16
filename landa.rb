@@ -46,7 +46,26 @@ not_found do
 end
 
 get '/' do
-  haml :index
+  options = Poll.new.pick(2)
+  haml :index, locals: { options: options }
+end
+
+get '/options.json' do
+  Option.where(:parent_uid.exists => false).all.to_json
+end
+
+get '/options/:uid.json' do
+  Option.where(parent_uid: params[:uid].to_i).to_json
+end
+
+get '/answers.json' do
+  Answer.all.to_json
+end
+
+post '/answers' do
+  Answer.create(pseudo_uid: params[:selected].to_i)
+  options = Poll.new.pick(0, params[:selected].to_i)
+  haml :index, locals: { options: options }
 end
 
 get '/privacidad' do
