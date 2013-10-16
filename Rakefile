@@ -37,6 +37,14 @@ namespace :test do
     task("api").execute
   end
 
+  desc "Run Poll tests"
+  task :poll do
+    test_task = Rake::TestTask.new("poll") do |t|
+      t.test_files = Dir.glob(File.join("test", "poll_test.rb"))
+    end
+    task("poll").execute
+  end
+
 end
 
 namespace :db do
