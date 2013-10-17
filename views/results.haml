@@ -1,5 +1,8 @@
 .container
-  %h3= t('poll.results.header')
-
+  %p.lead= t('poll.results.header')
   %a(href="/" id="poll-reboot")= t('poll.results.reboot')
+
+%footer
+  .container
+    = haml :form
 

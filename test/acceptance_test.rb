@@ -5,27 +5,32 @@ require 'capybara/dsl'
 
 class AcceptanceTest < Test::Unit::TestCase
   include Capybara::DSL
-  # Capybara.default_driver = :selenium
+  Capybara.default_driver = :selenium
 
   def setup
     Capybara.app = Sinatra::Application.new
   end
 
-=begin
-  # PENDING: url changed!
-  def test_it_can_add_new_fields
-    Capybara.current_driver = :selenium
+  def move_to_results_page
+    set_some_poll_options
     visit '/'
-    click_link 'new-data-request'
-    assert_equal 2, all('.data-request').count
-    Capybara.use_default_driver
+    click_link 'option-1'
+    click_link 'option-100'
   end
 
-  def test_it_can_suggest_category
-    Capybara.current_driver = :selenium
+  def test_it_can_add_new_fields
+    move_to_results_page
+    click_link 'new-data-request'
+    assert_equal 2, all('.data-request').count
+  end
 
+=begin
+
+  # This functionality was removed
+
+  def test_it_can_suggest_category
     delete_some_user
-    visit '/'
+    move_to_results_page
 
     new_category = "Fooness"
     # Hijack Javascript prompt
@@ -35,17 +40,6 @@ class AcceptanceTest < Test::Unit::TestCase
     signup
 
     assert_equal "[#{new_category}] #{}", some_user.data_requests.map(&:to_s).join(",")
-    Capybara.use_default_driver
-  end
-
-  def test_it_signups
-    delete_some_user
-
-    visit '/'
-    signup
-
-    assert_equal '/signup', current_path
-    assert_equal 1, User.where(email: some_email).count
   end
 
   def test_it_appends_requested_data
@@ -54,7 +48,7 @@ class AcceptanceTest < Test::Unit::TestCase
     description = 'Gasto en medicinas 2012'
     category = 'Salud'
 
-    visit '/'
+    move_to_results_page
     fill_in('data-requests[][description]', :with => description)
     select(category, :from => 'data-requests[][category]')
     signup
@@ -62,46 +56,45 @@ class AcceptanceTest < Test::Unit::TestCase
     assert_equal "[#{category}] #{description}", some_user.data_requests.map(&:to_s).join(",")
   end
 
+=end
+
+  def test_it_signups
+    delete_some_user
+
+    move_to_results_page
+    signup
+
+    assert_equal '/signup', current_path
+    assert_equal 1, User.where(email: some_email).count
+  end
+
   def test_it_trims_empty_requests
     delete_some_user
 
-    visit '/'
+    move_to_results_page
     signup
 
     assert_equal 0, some_user.data_requests.count
   end
-=end
 
   def test_it_can_submit_answer_form_by_click
     set_some_poll_options
     count_before = Answer.count
-    Capybara.current_driver = :selenium
     visit '/'
     click_link 'option-1'
     assert_equal '/answers', current_path
     assert_equal count_before + 1, Answer.count
-    Capybara.use_default_driver
   end
 
   def test_it_shows_poll_results_when_poll_ends
-    set_some_poll_options
-    Capybara.current_driver = :selenium
-    visit '/'
-    click_link 'option-1'
-    click_link 'option-100'
+    move_to_results_page
     assert_equal '/results', current_path
-    Capybara.use_default_driver
   end
 
   def test_that_user_starts_over_when_poll_ends
-    set_some_poll_options
-    Capybara.current_driver = :selenium
-    visit '/'
-    click_link 'option-1'
-    click_link 'option-100'
+    move_to_results_page
     click_link 'poll-reboot'
     assert_equal '/', current_path
-    Capybara.use_default_driver
   end
 
 end

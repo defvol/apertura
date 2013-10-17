@@ -3,6 +3,7 @@ es:
     thanks: Gracias por tu registro
     coda: Te mantendremos al tanto
   form:
+    call_to_action_html: 'Regístrate y mantente al tanto de <b>datos.gob.mx</b>'
     disclaimer: Al registrarte confirmas estar de acuerdo con nuestra leyenda de privacidad ubicada en %{link}
     email: Correo electrónico
     request:
@@ -17,6 +18,7 @@ es:
         six: Migración
         seven: Gasto público
         other: Otro
+      suggest: Sugiere un tema
     signup: Registrar
   layout:
     title: DATOS.GOB.MX

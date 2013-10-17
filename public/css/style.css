@@ -8,7 +8,7 @@ body {
 }
 
 header {
-  background-color: #333333;
+  background-color: #333;
   color: white;
 }
 
@@ -29,7 +29,7 @@ hr {
 }
 
 i {
-  color: #000;
+  color: #fff;
   font-size: 24px;
 }
 
@@ -48,12 +48,27 @@ i {
   height: 44px;
 }
 
+#signup-submit {
+  background-color: #f2f2f2;
+  color: #333;
+  font-style: italic;
+  text-transform: lowercase;
+}
+
 #errors {
   color: #b94a48;
 }
 
 p.lead {
   font-style: italic;
+}
+
+footer {
+  background-color: #333;
+  bottom: 0;
+  color: #fff;
+  position: absolute;
+  width: 100%;
 }
 
 /* Graph */
