@@ -65,7 +65,15 @@ end
 post '/answers' do
   Answer.create(pseudo_uid: params[:selected].to_i)
   options = Poll.new.pick(0, params[:selected].to_i)
-  haml :index, locals: { options: options }
+  if options.empty?
+    redirect '/results'
+  else
+    haml :index, locals: { options: options }
+  end
+end
+
+get '/results' do
+  haml :results
 end
 
 get '/privacidad' do

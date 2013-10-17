@@ -32,6 +32,9 @@ es:
         taken: "fue registrado anteriormente"
   poll:
     lead: ¿Qué dato del gobierno te gustaría conocer?
+    results:
+      header: Resultados de la encuesta
+      reboot: Continuar
   privacy:
     title: Leyenda de Información del Portal Datos Abiertos
     terms: |

@@ -83,5 +83,26 @@ class AcceptanceTest < Test::Unit::TestCase
     Capybara.use_default_driver
   end
 
+  def test_it_shows_poll_results_when_poll_ends
+    set_some_poll_options
+    Capybara.current_driver = :selenium
+    visit '/'
+    click_link 'option-1'
+    click_link 'option-100'
+    assert_equal '/results', current_path
+    Capybara.use_default_driver
+  end
+
+  def test_that_user_starts_over_when_poll_ends
+    set_some_poll_options
+    Capybara.current_driver = :selenium
+    visit '/'
+    click_link 'option-1'
+    click_link 'option-100'
+    click_link 'poll-reboot'
+    assert_equal '/', current_path
+    Capybara.use_default_driver
+  end
+
 end
 
