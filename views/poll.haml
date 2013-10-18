@@ -2,7 +2,8 @@
 
 %form(action="/answers" id="answers" method="post" role="form")
   %input(type="hidden" name="selected" value="0")
-  #options
+  %ul#options
     - locals[:options].each do |option|
-      %a(class="poll-option" href="#" id="option-#{option.pseudo_uid}")= option.text
+      %li
+        %a(class="poll-option btn-3d green" href="#" id="option-#{option.pseudo_uid}")= option.text
 

@@ -23,6 +23,8 @@ input, select, i {
   i {
     margin: 8px 0 7px 0;
   }
+
+  .btn-3d { font-size: 22px; }
 }
 
 @media screen and (max-width: 480px) {
