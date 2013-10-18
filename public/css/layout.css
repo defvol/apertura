@@ -9,6 +9,21 @@ input, select, i {
   margin-bottom: 15px;
 }
 
+.logo {
+  float: left;
+  height: 180px; /* Hack to keep text alignment after resizing */
+}
+
+.logo img {
+  width: 60px;
+  margin: 40px 20px 0 0;
+}
+
+p { font-size: 12px }
+p.lead { text-align: center }
+
+#new-data-request { display: none }
+
 /* Responsive: Portrait tablets and up */
 
 @media screen and (min-width: 768px) {
@@ -24,22 +39,14 @@ input, select, i {
     margin: 8px 0 7px 0;
   }
 
-  .btn-3d { font-size: 22px; }
+  .btn-3d { font-size: 22px }
+  .logo img { width: 80px }
+  .lead { text-align: left }
+
+  p { font-size: 14px }
 }
 
-@media screen and (max-width: 480px) {
-  p { font-size: 12px; }
-}
-
-/* Header */
-
-.logo {
-  float: left;
-  height: 180px; /* Hack to keep text alignment after resizing */
-}
-
-.logo img {
-  width: 80px;
-  margin-top: 40px;
+@media screen and (min-width: 992px) {
+  #new-data-request { display: block }
 }
 

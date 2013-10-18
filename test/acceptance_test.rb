@@ -20,6 +20,7 @@ class AcceptanceTest < Test::Unit::TestCase
 
   def test_it_can_add_new_fields
     move_to_results_page
+    page.driver.browser.manage.window.resize_to(1000, 500)
     click_link 'new-data-request'
     assert_equal 2, all('.data-request').count
   end
