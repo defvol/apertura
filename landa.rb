@@ -63,7 +63,14 @@ get '/answers.json' do
 end
 
 post '/answers' do
-  Answer.create(pseudo_uid: params[:selected].to_i)
+  option = Option.where(pseudo_uid: params[:selected].to_i).all.first
+  # Check if sent option exists in our database
+  unless option.nil?
+    # Embed selected option in the answers record
+    selected_option = SelectedOption.new(JSON.parse(option.to_json))
+    Answer.create(selected_option: selected_option)
+  end
+
   options = Poll.new.pick(0, params[:selected].to_i)
   if options.empty?
     redirect '/results'
