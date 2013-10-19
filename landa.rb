@@ -83,6 +83,10 @@ get '/results' do
   haml :results
 end
 
+get '/votes.json' do
+  Answer.votes_by_category.to_json
+end
+
 get '/privacidad' do
   haml :privacy
 end
