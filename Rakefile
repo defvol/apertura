@@ -54,7 +54,9 @@ namespace :db do
     raise "Do not run this in production!" if ENV['RACK_ENV'] == "production"
 
     puts "Clearing database at #{MongoMapper.database.name}"
-    puts "#{User.delete_all.count} objects deleted"
+    puts "#{User.delete_all.count} users deleted"
+    puts "#{Option.delete_all.count} options deleted"
+    puts "#{Answer.delete_all.count} answers deleted"
   end
 
   desc "Seed database"
