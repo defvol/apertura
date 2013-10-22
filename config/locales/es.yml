@@ -36,7 +36,7 @@ es:
     lead: ¿Qué dato del gobierno te gustaría conocer?
     results:
       header: Resultados de la encuesta
-      reboot: Continuar
+      reboot: Seguir con la encuesta
   privacy:
     title: Leyenda de Información del Portal Datos Abiertos
     terms: |

@@ -1,7 +1,8 @@
 .container
   %p.lead= t('poll.results.header')
   #chart
-  %a(href="/" id="poll-reboot")= t('poll.results.reboot')
+  %p.poll-reboot-wrapper
+    %a(href="/" id="poll-reboot")= t('poll.results.reboot')
 
 %footer
   .container
