@@ -9,6 +9,7 @@ class AcceptanceTest < Test::Unit::TestCase
 
   def setup
     Capybara.app = Sinatra::Application.new
+    I18n.locale = :es
   end
 
   def test_it_can_add_new_fields
@@ -60,6 +61,7 @@ class AcceptanceTest < Test::Unit::TestCase
 
     assert_equal '/signup', current_path
     assert_equal 1, User.where(email: some_email).count
+    assert_equal true, page.has_text?(I18n.t('confirmation.thanks'))
   end
 
   def test_it_trims_empty_requests
