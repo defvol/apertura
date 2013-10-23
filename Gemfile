@@ -14,6 +14,8 @@ gem 'rack-flash3'
 
 gem 'i18n'
 
+gem 'mechanize'
+
 group :development do
   gem 'foreman'
 end
