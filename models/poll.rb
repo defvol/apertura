@@ -13,10 +13,10 @@ class Poll
   def pick(number_of_samples, parent_uid=nil)
     _options = []
     if parent_uid.nil?
-      _options = Option.where(:parent_uid.exists => false).limit(number_of_samples).all
+      _options = Option.where(:parent_uid.exists => false).all
       raise 'Could not find poll options in database' if _options.empty?
     else
-      _options = Option.where(:parent_uid => parent_uid).limit(number_of_samples).all
+      _options = Option.where(:parent_uid => parent_uid).all
     end
 
     number_of_samples > 0 ? _options.sample(number_of_samples) : _options
