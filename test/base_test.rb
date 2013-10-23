@@ -12,18 +12,18 @@ class BaseTest < Test::Unit::TestCase
   end
 
   def test_that_email_cant_be_blank
-    post '/signup'
+    post '/registro'
     assert_not_equal last_response.status, 200
   end
 
   def test_email_uniqueness
     delete_some_user
-    2.times { post '/signup', { :email => some_email } }
+    2.times { post '/registro', { :email => some_email } }
     assert_not_equal last_response.status, 200
   end
 
   def test_email_validation
-    post '/signup', { email: 'bar' }
+    post '/registro', { email: 'bar' }
     assert_not_equal last_response.status, 200
   end
 
@@ -53,7 +53,7 @@ class BaseTest < Test::Unit::TestCase
 
   def test_answer_form_submit
     count_before = Answer.count
-    post '/answers', { selected: '1' }
+    post '/respuestas', { selected: '1' }
     assert_equal count_before + 1, Answer.count
   end
 

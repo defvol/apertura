@@ -13,7 +13,7 @@ class AcceptanceTest < Test::Unit::TestCase
   end
 
   def test_it_can_add_new_fields
-    visit '/results'
+    visit '/resultados'
     page.driver.browser.manage.window.resize_to(1000, 500)
     click_link 'new-data-request'
     assert_equal 2, all('.data-request').count
@@ -25,7 +25,7 @@ class AcceptanceTest < Test::Unit::TestCase
 
   def test_it_can_suggest_category
     delete_some_user
-    visit '/results'
+    visit '/resultados'
 
     new_category = "Fooness"
     # Hijack Javascript prompt
@@ -43,7 +43,7 @@ class AcceptanceTest < Test::Unit::TestCase
     description = 'Gasto en medicinas 2012'
     category = 'Salud'
 
-    visit '/results'
+    visit '/resultados'
     fill_in('data-requests[][description]', :with => description)
     select(category, :from => 'data-requests[][category]')
     signup
@@ -56,10 +56,10 @@ class AcceptanceTest < Test::Unit::TestCase
   def test_it_signups
     delete_some_user
 
-    visit '/results'
+    visit '/resultados'
     signup
 
-    assert_equal '/signup', current_path
+    assert_equal '/registro', current_path
     assert_equal 1, User.where(email: some_email).count
     assert_equal true, page.has_text?(I18n.t('confirmation.thanks'))
   end
@@ -67,7 +67,7 @@ class AcceptanceTest < Test::Unit::TestCase
   def test_it_trims_empty_requests
     delete_some_user
 
-    visit '/results'
+    visit '/resultados'
     signup
 
     assert_equal 0, some_user.data_requests.count
@@ -78,7 +78,7 @@ class AcceptanceTest < Test::Unit::TestCase
     count_before = Answer.count
     visit '/'
     click_link 'option-1'
-    assert_equal '/answers', current_path
+    assert_equal '/respuestas', current_path
     assert_equal count_before + 1, Answer.count
   end
 
@@ -92,7 +92,7 @@ class AcceptanceTest < Test::Unit::TestCase
   def test_that_user_may_finish_poll
     visit '/'
     click_link 'poll-finish'
-    assert_equal '/results', current_path
+    assert_equal '/resultados', current_path
   end
 
 end
