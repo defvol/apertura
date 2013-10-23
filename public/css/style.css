@@ -8,12 +8,16 @@ body {
 }
 
 header {
-  background-color: #333333;
+  background-color: #333;
   color: white;
 }
 
 p {
   font-weight: 300;
+}
+
+a {
+  color: #15986E;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -29,7 +33,7 @@ hr {
 }
 
 i {
-  color: #000;
+  color: #fff;
   font-size: 24px;
 }
 
@@ -48,12 +52,74 @@ i {
   height: 44px;
 }
 
+#signup-submit {
+  background-color: #f2f2f2;
+  color: #333;
+  font-style: italic;
+  text-transform: lowercase;
+}
+
 #errors {
   color: #b94a48;
 }
 
 p.lead {
   font-style: italic;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+}
+
+/* Buttons */
+
+/*
+ * $green: #82c8a0;
+ * $deep-green: #7ec29b;
+ */
+
+ul#options { padding-left: 0; }
+
+ul#options li {
+  display: inline-block;
+  list-style: none;
+  width: 100%;
+}
+
+li a:link, li a:visited, li a:hover, li a:active {
+  text-decoration: none;
+  color: white;
+}
+
+.btn-3d {
+  position: relative;
+  display: inline-block;
+  padding: 20px 60px;
+  color: white;
+  margin: 20px 0 0 -5px;
+  text-align: center;
+  transition: all .08s linear;
+  width: 100%;
+}
+
+/* moves button 9px down when clicked */
+.btn-3d:active {
+  top: 9px;
+}
+
+.btn-3d.green {
+  background-color: #22D4A7;
+  box-shadow:
+    0 0 0 1px #22D4A7 inset,
+    0 0 0 2px rgba(255, 255, 255, 0.15) inset,
+    0 8px 0 1px rgba(0, 0, 0, 0.2),
+    0 8px 0 0 #15986E;
+}
+
+.btn-3d.green:active {
+  box-shadow: none;
 }
 
 /* Graph */
@@ -75,4 +141,16 @@ div.tooltip {
   stroke-width: 2px;
   shape-rendering: crispEdges;
 }
+
+.poll-reboot-wrapper {
+  text-align: right;
+}
+
+/* Bar chart */
+
+rect.bar {
+  fill: #22D4A7;
+}
+
+svg text { font-size: 12px }
 

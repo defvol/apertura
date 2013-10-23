@@ -46,7 +46,45 @@ not_found do
 end
 
 get '/' do
-  haml :index
+  options = Poll.new.pick(2)
+  haml :index, locals: { options: options }
+end
+
+get '/options.json' do
+  Option.where(:parent_uid.exists => false).all.to_json
+end
+
+get '/options/:uid.json' do
+  Option.where(parent_uid: params[:uid].to_i).to_json
+end
+
+get '/answers.json' do
+  Answer.all.to_json
+end
+
+post '/answers' do
+  option = Option.where(pseudo_uid: params[:selected].to_i).all.first
+  # Check if sent option exists in our database
+  unless option.nil?
+    # Embed selected option in the answers record
+    selected_option = SelectedOption.new(JSON.parse(option.to_json))
+    Answer.create(selected_option: selected_option)
+  end
+
+  options = Poll.new.pick(5, params[:selected].to_i)
+  if options.empty?
+    redirect '/results'
+  else
+    haml :index, locals: { options: options }
+  end
+end
+
+get '/results' do
+  haml :results
+end
+
+get '/votes.json' do
+  Answer.votes_by_category.to_json
 end
 
 get '/privacidad' do

@@ -1,0 +1,9 @@
+%p.lead= t('poll.lead')
+
+%form(action="/answers" id="answers" method="post" role="form")
+  %input(type="hidden" name="selected" value="0")
+  %ul#options
+    - locals[:options].each do |option|
+      %li
+        %a(class="poll-option btn-3d green" href="#" id="option-#{option.pseudo_uid}")= option.text
+

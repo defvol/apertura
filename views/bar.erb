@@ -1,0 +1,45 @@
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var margin = { top: 20, right: 20, bottom: 30, left: 20 },
+    width = 670 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var formatPercent = d3.format(".0%");
+
+var x = d3.scale.linear()
+    .range([0, width]);
+
+var y = d3.scale.ordinal()
+    .rangeRoundBands([0, height], .50);
+
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.json("/votes.json", function(error, data) {
+
+  x.domain([0, d3.max(data, function(d) { return d.count; })]);
+  y.domain(data.map(function(d) { return d.category; }));
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return 0; })
+      .attr("width", function(d) { return x(d.count); })
+      .attr("y", function(d) { return y(d.category); })
+      .attr("height", y.rangeBand())
+
+  svg.selectAll("text")
+      .data(data)
+    .enter().append("text")
+      .attr("x", function(d) { return 1; })
+      .attr("y", function(d) { return y(d.category) + y.rangeBand() + 14; })
+      .text(function(d) { return d.category });
+});
+
+</script>
+

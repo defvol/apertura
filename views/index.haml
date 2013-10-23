@@ -1,6 +1,3 @@
 .container
-  = haml :form
-- unless ENV['NOGRAPH']
-  #graph
-    = erb :streamgraph
+  = haml :poll, locals: locals
 

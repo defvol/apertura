@@ -1,4 +1,4 @@
-%p.lead= t('form.lead')
+%p.lead= t('form.request.suggest')
 
 %form(action="/signup" method="post" role="form")
   #data-requests
@@ -6,22 +6,25 @@
       .row
         .col-md-9
           %input.form-control(name="data-requests[][description]" placeholder="#{t('form.request.example')}" type="text")
-      .row
-        .col-md-9
-          %select.form-control(name="data-requests[][category]" onchange="addDataCategory(this)")
-            %option(value="" disabled selected)= t('form.request.category.placeholder')
-            %option= t('form.request.category.one')
-            %option= t('form.request.category.two')
-            %option= t('form.request.category.three')
-            %option= t('form.request.category.four')
-            %option= t('form.request.category.five')
-            %option= t('form.request.category.six')
-            %option= t('form.request.category.seven')
-            %option.other= t('form.request.category.other')
         .col-md-1
           %a#new-data-request(href="#" onclick="addDataRequest(this)")
             %i.glyphicon.glyphicon-plus
+      /
+        .row
+          .col-md-9
+            %select.form-control(name="data-requests[][category]" onchange="addDataCategory(this)")
+              %option(value="" disabled selected)= t('form.request.category.placeholder')
+              %option= t('form.request.category.one')
+              %option= t('form.request.category.two')
+              %option= t('form.request.category.three')
+              %option= t('form.request.category.four')
+              %option= t('form.request.category.five')
+              %option= t('form.request.category.six')
+              %option= t('form.request.category.seven')
+              %option.other= t('form.request.category.other')
   #enrollment.form-inline.row
+    .col-md-12
+      %p.lead= t('form.call_to_action_html')
     .col-md-9
       %input#email.form-control{name: "email", placeholder: "#{t('form.email')}", type: "text"}
     .col-md-3

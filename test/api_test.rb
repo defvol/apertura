@@ -23,6 +23,16 @@ class ApiTest < Test::Unit::TestCase
     @early_adopter.save
   end
 
+  def save_some_answers
+    option = Option.where(pseudo_uid: 1).all.first
+    selected = SelectedOption.new(JSON.parse(option.to_json))
+    5.times { Answer.create(selected_option: JSON.parse(selected.to_json)) }
+
+    option = Option.where(pseudo_uid: 100).all.first
+    selected = SelectedOption.new(JSON.parse(option.to_json))
+    Answer.create(selected_option: JSON.parse(selected.to_json))
+  end
+
   def test_requests_json
     save_some_requests
     get '/requests.json'
@@ -82,6 +92,33 @@ class ApiTest < Test::Unit::TestCase
         count: 1,
         category: @requests[2][:category],
         day: @user.created_at.yday
+      }
+    ]
+    assert_equal response.to_json, last_response.body
+  end
+
+  def test_it_gets_first_options
+    set_some_poll_options
+    get '/options.json'
+    assert_equal Option.where(:parent_uid.exists => false).all.to_json, last_response.body
+  end
+
+  def test_it_gets_options_for_a_parent_uid
+    set_some_poll_options
+    get '/options/1.json'
+    assert_equal Option.where(parent_uid: 1).all.to_json, last_response.body
+  end
+
+  def test_it_returns_data_requests_by_category
+    set_some_poll_options
+    Answer.delete_all
+    save_some_answers
+
+    get '/votes.json'
+    response = [
+      {
+        count: 5,
+        category: "Lorem ipsum"
       }
     ]
     assert_equal response.to_json, last_response.body

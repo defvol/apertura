@@ -37,6 +37,14 @@ namespace :test do
     task("api").execute
   end
 
+  desc "Run Poll tests"
+  task :poll do
+    test_task = Rake::TestTask.new("poll") do |t|
+      t.test_files = Dir.glob(File.join("test", "poll_test.rb"))
+    end
+    task("poll").execute
+  end
+
 end
 
 namespace :db do
@@ -46,7 +54,9 @@ namespace :db do
     raise "Do not run this in production!" if ENV['RACK_ENV'] == "production"
 
     puts "Clearing database at #{MongoMapper.database.name}"
-    puts "#{User.delete_all.count} objects deleted"
+    puts "#{User.delete_all.count} users deleted"
+    puts "#{Option.delete_all.count} options deleted"
+    puts "#{Answer.delete_all.count} answers deleted"
   end
 
   desc "Seed database"
@@ -67,6 +77,33 @@ namespace :db do
     end
 
     puts "#{count} objects saved"
+  end
+
+  require "csv"
+
+  desc "Seed database with poll answers"
+  task :seed_poll do
+    rows = CSV.read("seed.csv", { :col_sep => "|" })
+    rows.shift # remove header row
+    rows.each do |row|
+      Option.create(pseudo_uid: row[0], parent_uid: row[1], text: row[2])
+    end
+    puts "Saved #{rows.length} entries"
+  end
+
+  desc "Seed database with poll answers directly from the interwebz"
+  task :seed_interwebz do
+    require 'mechanize'
+    agent = Mechanize.new
+    agent.follow_meta_refresh = true
+    page = agent.get(ENV['POLL_ANSWERS_URL'])
+
+    rows = CSV.parse(page.body)
+    rows.shift # remove header row
+    rows.each do |row|
+      Option.create(pseudo_uid: row[0], parent_uid: row[1], text: row[2])
+    end
+    puts "Saved #{rows.length} entries"
   end
 
 end

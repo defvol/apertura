@@ -2,6 +2,14 @@ var dataRequestTemplate = '';
 var removeDataRequestHtml = '<a class="remove-data-request" href="#" onclick="removeDataRequest(this)"><i class="glyphicon glyphicon-remove"></i></a>';
 
 $(function() {
+  // Poll options will submit the form
+  $("[id^=option-]").click(function(e) {
+    var id = $(e.currentTarget).attr("id").replace(/^option-/, '');
+    var $form = $(e.currentTarget).closest("form");
+    $form.find("input:hidden[name=selected]").val(id)
+    $form.submit();
+  });
+
   $("#email").keydown(toggleDisclaimer);
 
   // Dynamic fields

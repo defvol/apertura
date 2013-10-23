@@ -51,5 +51,18 @@ class BaseTest < Test::Unit::TestCase
     assert_equal 1, user.data_requests.last.errors.size
   end
 
+  def test_answer_form_submit
+    count_before = Answer.count
+    post '/answers', { selected: '1' }
+    assert_equal count_before + 1, Answer.count
+  end
+
+  def test_it_validates_existence_of_selected_option
+    selected = SelectedOption.new(pseudo_uid: 31337, parent_uid: 1, text: 'Foo')
+    selected.save
+    assert_equal 1, selected.errors.count
+    assert_equal "Pseudo uid no existente", selected.errors.full_messages.last
+  end
+
 end
 
