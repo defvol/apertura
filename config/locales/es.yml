@@ -37,7 +37,8 @@ es:
       finish: Terminar la encuesta
     lead: ¿Qué dato del gobierno te gustaría conocer?
     results:
-      header: Resultados de la encuesta
+      header: Resultados de todos los participantes de la encuesta
+      legend: La gráfica muestra la proporción del número de veces que ha sido seleccionada cada categoría.
   privacy:
     title: Leyenda de Información del Portal Datos Abiertos
     terms: |
