@@ -73,7 +73,7 @@ post '/answers' do
 
   options = Poll.new.pick(4, params[:selected].to_i)
   if options.empty?
-    redirect '/results'
+    redirect '/'
   else
     haml :index, locals: { options: options }
   end

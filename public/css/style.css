@@ -142,7 +142,8 @@ div.tooltip {
   shape-rendering: crispEdges;
 }
 
-.poll-reboot-wrapper {
+.poll-action-wrapper {
+  padding-top: 10px;
   text-align: right;
 }
 

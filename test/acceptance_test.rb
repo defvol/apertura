@@ -11,15 +11,8 @@ class AcceptanceTest < Test::Unit::TestCase
     Capybara.app = Sinatra::Application.new
   end
 
-  def move_to_results_page
-    set_some_poll_options
-    visit '/'
-    click_link 'option-1'
-    click_link 'option-100'
-  end
-
   def test_it_can_add_new_fields
-    move_to_results_page
+    visit '/results'
     page.driver.browser.manage.window.resize_to(1000, 500)
     click_link 'new-data-request'
     assert_equal 2, all('.data-request').count
@@ -31,7 +24,7 @@ class AcceptanceTest < Test::Unit::TestCase
 
   def test_it_can_suggest_category
     delete_some_user
-    move_to_results_page
+    visit '/results'
 
     new_category = "Fooness"
     # Hijack Javascript prompt
@@ -49,7 +42,7 @@ class AcceptanceTest < Test::Unit::TestCase
     description = 'Gasto en medicinas 2012'
     category = 'Salud'
 
-    move_to_results_page
+    visit '/results'
     fill_in('data-requests[][description]', :with => description)
     select(category, :from => 'data-requests[][category]')
     signup
@@ -62,7 +55,7 @@ class AcceptanceTest < Test::Unit::TestCase
   def test_it_signups
     delete_some_user
 
-    move_to_results_page
+    visit '/results'
     signup
 
     assert_equal '/signup', current_path
@@ -72,7 +65,7 @@ class AcceptanceTest < Test::Unit::TestCase
   def test_it_trims_empty_requests
     delete_some_user
 
-    move_to_results_page
+    visit '/results'
     signup
 
     assert_equal 0, some_user.data_requests.count
@@ -87,15 +80,17 @@ class AcceptanceTest < Test::Unit::TestCase
     assert_equal count_before + 1, Answer.count
   end
 
-  def test_it_shows_poll_results_when_poll_ends
-    move_to_results_page
-    assert_equal '/results', current_path
+  def test_it_cycles_ad_infinitum
+    visit '/'
+    click_link 'option-1'
+    click_link 'option-100'
+    page.assert_selector('#option-1')
   end
 
-  def test_that_user_starts_over_when_poll_ends
-    move_to_results_page
-    click_link 'poll-reboot'
-    assert_equal '/', current_path
+  def test_that_user_may_finish_poll
+    visit '/'
+    click_link 'poll-finish'
+    assert_equal '/results', current_path
   end
 
 end
