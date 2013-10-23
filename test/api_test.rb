@@ -27,6 +27,10 @@ class ApiTest < Test::Unit::TestCase
     option = Option.where(pseudo_uid: 1).all.first
     selected = SelectedOption.new(JSON.parse(option.to_json))
     5.times { Answer.create(selected_option: JSON.parse(selected.to_json)) }
+
+    option = Option.where(pseudo_uid: 100).all.first
+    selected = SelectedOption.new(JSON.parse(option.to_json))
+    Answer.create(selected_option: JSON.parse(selected.to_json))
   end
 
   def test_requests_json

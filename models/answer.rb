@@ -7,6 +7,7 @@ class Answer
 
   def self.votes_by_category
     Answer.collection.aggregate([
+      { "$match" => { "selected_option.parent_uid" => { "$exists" => false } } },
       { "$group" => {
           _id: "$selected_option.text",
           count: { "$sum" => 1 } } },
