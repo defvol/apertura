@@ -4,7 +4,7 @@
   %input(type="hidden" name="selected" value="0")
   %ul#options
     - locals[:options].each do |option|
-      %li
+      %li(class="poll-option-wrapper")
         %a(class="poll-option btn-3d green" href="#" id="option-#{option.pseudo_uid}")= option.text
 
 %p.poll-action-wrapper
