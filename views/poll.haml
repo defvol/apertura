@@ -7,3 +7,6 @@
       %li
         %a(class="poll-option btn-3d green" href="#" id="option-#{option.pseudo_uid}")= option.text
 
+%p.poll-action-wrapper
+  %a(href="/results" id="poll-finish")= t('poll.actions.finish')
+

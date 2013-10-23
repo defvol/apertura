@@ -71,9 +71,9 @@ post '/answers' do
     Answer.create(selected_option: selected_option)
   end
 
-  options = Poll.new.pick(5, params[:selected].to_i)
+  options = Poll.new.pick(4, params[:selected].to_i)
   if options.empty?
-    redirect '/results'
+    redirect '/'
   else
     haml :index, locals: { options: options }
   end
