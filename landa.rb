@@ -62,7 +62,7 @@ get '/answers.json' do
   Answer.all.to_json
 end
 
-post '/answers' do
+post '/respuestas' do
   option = Option.where(pseudo_uid: params[:selected].to_i).all.first
   # Check if sent option exists in our database
   unless option.nil?
@@ -79,7 +79,7 @@ post '/answers' do
   end
 end
 
-get '/results' do
+get '/resultados' do
   haml :results
 end
 
@@ -91,7 +91,7 @@ get '/privacidad' do
   haml :privacy
 end
 
-post '/signup' do
+post '/registro' do
   data_requests = params[:'data-requests'] || []
 
   # Recursive trimming to clean up empty hashes and values

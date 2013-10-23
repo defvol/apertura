@@ -3,7 +3,8 @@ var removeDataRequestHtml = '<a class="remove-data-request" href="#" onclick="re
 
 $(function() {
   // Poll options will submit the form
-  $("[id^=option-]").click(function(e) {
+  $("[id^=option-], .poll-option-wrapper").click(function(e) {
+    e.preventDefault();
     var id = $(e.currentTarget).attr("id").replace(/^option-/, '');
     var $form = $(e.currentTarget).closest("form");
     $form.find("input:hidden[name=selected]").val(id)

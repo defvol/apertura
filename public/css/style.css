@@ -67,6 +67,10 @@ p.lead {
   font-style: italic;
 }
 
+p.legend {
+  font-size: 12px;
+}
+
 footer {
   background-color: #333;
   color: #fff;
