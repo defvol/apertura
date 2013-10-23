@@ -11,10 +11,9 @@ gem "mongo_mapper", "0.13.0.beta2"
 
 gem "haml"
 gem 'rack-flash3'
-
 gem 'i18n'
-
 gem 'mechanize'
+gem 'newrelic_rpm'
 
 group :development do
   gem 'foreman'

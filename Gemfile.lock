@@ -58,6 +58,7 @@ GEM
     multi_json (1.7.9)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9)
+    newrelic_rpm (3.6.8.168)
     nokogiri (1.5.9)
     ntlm-http (0.1.1)
     plucky (0.6.6)
@@ -109,6 +110,7 @@ DEPENDENCIES
   mechanize
   mongo
   mongo_mapper (= 0.13.0.beta2)
+  newrelic_rpm
   rack-flash3
   rack-test
   rake
