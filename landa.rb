@@ -11,15 +11,22 @@ Dir[File.join(File.dirname(__FILE__), 'models', '*.rb')].each { |file| require f
 
 I18n.load_path += Dir[File.join(File.dirname(__FILE__), 'config', 'locales', '*.yml').to_s]
 
-enable :sessions
-use Rack::Flash
-
 configure do
+
+  use Rack::Session::Cookie,
+    :key => 'rack.session',
+    :path => '/',
+    :expire_after => 2592000,
+    :secret => (1..8).map { ('a'..'z').to_a[rand(26)] }.join
+
+  use Rack::Flash
+
   if ENV['MONGODB_URI'].nil?
     MongoMapper.database = "landa_#{ENV['RACK_ENV']}"
   else
     MongoMapper.setup({'production' => {'uri' => ENV['MONGODB_URI']}}, 'production')
   end
+
 end
 
 configure :production do
