@@ -22,6 +22,10 @@ configure do
   end
 end
 
+configure :production do
+  require 'newrelic_rpm'
+end
+
 helpers do
   def t(*args)
     I18n.t(*args)
