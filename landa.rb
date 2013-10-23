@@ -71,7 +71,7 @@ post '/answers' do
     Answer.create(selected_option: selected_option)
   end
 
-  options = Poll.new.pick(0, params[:selected].to_i)
+  options = Poll.new.pick(5, params[:selected].to_i)
   if options.empty?
     redirect '/results'
   else
