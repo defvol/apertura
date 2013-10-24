@@ -35,6 +35,7 @@ es:
   poll:
     actions:
       finish: Terminar la encuesta
+      reboot: Seguir con la encuesta
     lead: ¿Qué dato del gobierno te gustaría conocer?
     results:
       header: Resultados de todos los participantes de la encuesta

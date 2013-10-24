@@ -61,6 +61,11 @@ helpers do
     %Q(<input type="hidden" name="authenticity_token" value="#{session[:csrf]}" />)
   end
 
+  def pick_color
+    session[:color_index] = (session[:color_index] || 0) ^ 1
+    ["green", "purple"][session[:color_index]]
+  end
+
 end
 
 before do
@@ -73,6 +78,7 @@ not_found do
 end
 
 get '/' do
+  session[:color] = pick_color
   options = Poll.new.pick(2)
   haml :index, locals: { options: options }
 end
@@ -98,7 +104,8 @@ post '/respuestas' do
     Answer.create(selected_option: selected_option)
   end
 
-  options = Poll.new.pick(4, params[:selected].to_i)
+  flash[:finish] = true
+  options = Poll.new.pick(2, params[:selected].to_i)
   if options.empty?
     redirect '/'
   else

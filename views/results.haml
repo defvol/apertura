@@ -1,7 +1,11 @@
 .container
   %p.lead= t('poll.results.header')
-  #chart
+
+  #chart(class="#{session[:color]}")
   %p.legend= "* " + t('poll.results.legend')
+
+  %p.poll-action-wrapper
+    %a(href="/" id="poll-reboot" class="#{session[:color]}")= t('poll.actions.reboot')
 
 %footer
   .container
