@@ -1,6 +1,6 @@
 .container
   %p.lead= t('poll.results.header')
-  #chart
+  #chart(class="#{session[:color]}")
   %p.legend= "* " + t('poll.results.legend')
 
 %footer

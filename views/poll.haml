@@ -6,8 +6,8 @@
   %ul#options
     - locals[:options].each do |option|
       %li(class="poll-option-wrapper")
-        %a(class="poll-option btn-3d green" href="#" id="option-#{option.pseudo_uid}")= option.text
+        %a(class="poll-option btn-3d #{session[:color]}" href="#" id="option-#{option.pseudo_uid}")= option.text
 
 %p.poll-action-wrapper
-  %a(href="/resultados" id="poll-finish")= t('poll.actions.finish')
+  %a(href="/resultados" id="poll-finish" class="#{session[:color]}")= t('poll.actions.finish')
 
