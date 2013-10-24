@@ -64,5 +64,19 @@ class AcceptanceTest < Test::Unit::TestCase
     assert_equal '/resultados', current_path
   end
 
+  def test_it_fails_with_token_mismatch
+    visit '/'
+    page.set_rack_session({ csrf: 'ye olde key' })
+    assert_raise Capybara::ElementNotFound do
+      click_link 'option-1'
+    end
+  end
+
+  def test_it_ensures_that_token_is_set_for_new_users
+    page.set_rack_session({})
+    visit '/'
+    assert_not_equal nil, page.get_rack_session_key('csrf')
+  end
+
 end
 
