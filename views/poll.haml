@@ -8,6 +8,7 @@
       %li(class="poll-option-wrapper")
         %a(class="poll-option btn-3d #{session[:color]}" href="#" id="option-#{option.pseudo_uid}")= option.text
 
-%p.poll-action-wrapper
-  %a(href="/resultados" id="poll-finish" class="#{session[:color]}")= t('poll.actions.finish')
+- if flash[:finish]
+  %p.poll-action-wrapper
+    %a(href="/resultados" id="poll-finish" class="#{session[:color]}")= t('poll.actions.finish')
 

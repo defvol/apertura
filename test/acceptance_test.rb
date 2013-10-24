@@ -93,6 +93,7 @@ class AcceptanceTest < Test::Unit::TestCase
 
   def test_that_user_may_finish_poll
     visit '/'
+    click_link 'option-1'
     click_link 'poll-finish'
     assert_equal '/resultados', current_path
   end

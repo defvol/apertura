@@ -104,6 +104,7 @@ post '/respuestas' do
     Answer.create(selected_option: selected_option)
   end
 
+  flash[:finish] = true
   options = Poll.new.pick(2, params[:selected].to_i)
   if options.empty?
     redirect '/'
