@@ -21,40 +21,6 @@ class AcceptanceTest < Test::Unit::TestCase
     assert_equal 2, all('.data-request').count
   end
 
-=begin
-
-  # This functionality was removed
-
-  def test_it_can_suggest_category
-    delete_some_user
-    visit '/resultados'
-
-    new_category = "Fooness"
-    # Hijack Javascript prompt
-    stub_js_function('window.prompt', new_category);
-    select('Otro', :from => 'data-requests[][category]')
-
-    signup
-
-    assert_equal "[#{new_category}] #{}", some_user.data_requests.map(&:to_s).join(",")
-  end
-
-  def test_it_appends_requested_data
-    delete_some_user
-
-    description = 'Gasto en medicinas 2012'
-    category = 'Salud'
-
-    visit '/resultados'
-    fill_in('data-requests[][description]', :with => description)
-    select(category, :from => 'data-requests[][category]')
-    signup
-
-    assert_equal "[#{category}] #{description}", some_user.data_requests.map(&:to_s).join(",")
-  end
-
-=end
-
   def test_it_signups
     delete_some_user
 

@@ -85,18 +85,6 @@ get '/' do
   haml :index, locals: { options: options }
 end
 
-get '/options.json' do
-  Option.where(:parent_uid.exists => false).all.to_json
-end
-
-get '/options/:uid.json' do
-  Option.where(parent_uid: params[:uid].to_i).to_json
-end
-
-get '/answers.json' do
-  Answer.all.to_json
-end
-
 post '/respuestas' do
   option = Option.where(pseudo_uid: params[:selected].to_i).all.first
   # Check if sent option exists in our database
@@ -140,17 +128,5 @@ post '/registro' do
     flash[:error] = user.errors.full_messages.join(",")
     redirect "/"
   end
-end
-
-get '/requests.json' do
-  User.data_requests.to_json
-end
-
-get '/categories.json' do
-  User.data_requests_by_category.to_json
-end
-
-get '/daily.json' do
-  User.data_requests_by_day.to_json
 end
 
