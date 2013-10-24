@@ -70,6 +70,9 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rack_session_access (0.1.1)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rake (10.1.0)
     rubyzip (0.9.9)
     selenium-webdriver (2.34.0)
@@ -112,7 +115,9 @@ DEPENDENCIES
   mongo_mapper (= 0.13.0.beta2)
   newrelic_rpm
   rack-flash3
+  rack-protection
   rack-test
+  rack_session_access
   rake
   rubyzip (< 1.0.0)
   selenium-webdriver (~> 2.34.0)

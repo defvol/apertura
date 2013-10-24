@@ -1,6 +1,7 @@
 %p.lead= t('poll.lead')
 
 %form(action="/respuestas" id="answers" method="post" role="form")
+  = csrf_input_tag
   %input(type="hidden" name="selected" value="0")
   %ul#options
     - locals[:options].each do |option|

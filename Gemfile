@@ -14,6 +14,7 @@ gem 'rack-flash3'
 gem 'i18n'
 gem 'mechanize'
 gem 'newrelic_rpm'
+gem 'rack-protection'
 
 group :development do
   gem 'foreman'
@@ -22,6 +23,7 @@ end
 group :test do
   gem 'rake'
   gem 'rack-test'
+  gem 'rack_session_access'
   gem 'capybara'
   # Fixes http://stackoverflow.com/questions/18555992/bundle-exec-rspec-spec-requests-static-pages-spec-rb-from-hartls-tutorial-isnt
   gem 'rubyzip', '< 1.0.0'
