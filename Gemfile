@@ -1,20 +1,20 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 ruby '2.0.0'
 
-gem "sinatra"
-gem "thin"
-gem "mongo"
-gem "bson_ext"
+gem 'sinatra'
+gem 'thin'
+gem 'mongo'
+gem 'bson_ext'
 
 # Fork v0.13.0.beta2 supporting Ruby 2.0 (check issue #473)
-gem "mongo_mapper", "0.13.0.beta2"
+gem 'mongo_mapper', '0.13.0.beta2'
 
-gem "haml"
+gem 'haml'
 gem 'rack-flash3'
 gem 'i18n'
 gem 'mechanize'
 gem 'newrelic_rpm'
-gem 'rack-protection'
+gem 'rack-protection', '>= 1.5.1'
 
 group :development do
   gem 'foreman'
