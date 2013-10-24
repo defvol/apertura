@@ -98,7 +98,7 @@ post '/respuestas' do
     Answer.create(selected_option: selected_option)
   end
 
-  options = Poll.new.pick(4, params[:selected].to_i)
+  options = Poll.new.pick(2, params[:selected].to_i)
   if options.empty?
     redirect '/'
   else
