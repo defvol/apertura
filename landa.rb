@@ -16,9 +16,9 @@ configure do
 
   enable :sessions
   use Rack::Session::Cookie,
-    :key => "rack.session.#{Time.now().to_i}",
+    :key => "rack.session",
     :path => '/',
-    :expire_after => 900,
+    :expire_after => 86400,
     :secret => (1..8).map { ('a'..'z').to_a[rand(26)] }.join
 
   if ENV['RACK_PROTECTION']
