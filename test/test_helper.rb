@@ -7,6 +7,8 @@ require_relative '../landa'
 class Test::Unit::TestCase
   include Rack::Test::Methods
 
+  @@csrf_token = 'fubar'
+
   def some_email
     "test@foo.bar"
   end
@@ -47,5 +49,11 @@ class Test::Unit::TestCase
     Option.create(pseudo_uid: 101, parent_uid: 1, text: "Lo-fi post-ironic et")
     Option.all
   end
+
+  def post_with_csrf_protection(path, options = {})
+    params = { 'authenticity_token' => @@csrf_token }.merge(options)
+    post(path, params, 'rack.session' => { :csrf => @@csrf_token })
+  end
+
 end
 

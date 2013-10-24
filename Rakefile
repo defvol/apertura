@@ -45,6 +45,14 @@ namespace :test do
     task("poll").execute
   end
 
+  desc "Run CSRF tests"
+  task :csrf do
+    test_task = Rake::TestTask.new("csrf") do |t|
+      t.test_files = Dir.glob(File.join("test", "csrf_test.rb"))
+    end
+    task("csrf").execute
+  end
+
 end
 
 namespace :db do

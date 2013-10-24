@@ -2,6 +2,7 @@ require_relative './test_helper'
 
 require 'capybara'
 require 'capybara/dsl'
+require 'rack_session_access/capybara'
 
 class AcceptanceTest < Test::Unit::TestCase
   include Capybara::DSL
@@ -10,6 +11,7 @@ class AcceptanceTest < Test::Unit::TestCase
   def setup
     Capybara.app = Sinatra::Application.new
     I18n.locale = :es
+    page.set_rack_session({ csrf: @@csrf_token })
   end
 
   def test_it_can_add_new_fields

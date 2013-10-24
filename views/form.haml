@@ -1,6 +1,7 @@
 %p.lead= t('form.request.suggest')
 
 %form(action="/registro" method="post" role="form")
+  = csrf_input_tag
   #data-requests
     .data-request
       .row

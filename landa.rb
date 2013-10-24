@@ -5,6 +5,7 @@ require 'mongo_mapper'
 require 'json'
 require 'rack-flash'
 require 'i18n'
+require 'rack/protection'
 
 Dir[File.join(File.dirname(__FILE__), 'helpers', '*.rb')].each { |file| require file }
 Dir[File.join(File.dirname(__FILE__), 'models', '*.rb')].each { |file| require file }
@@ -13,11 +14,15 @@ I18n.load_path += Dir[File.join(File.dirname(__FILE__), 'config', 'locales', '*.
 
 configure do
 
+  enable :sessions
   use Rack::Session::Cookie,
     :key => 'rack.session',
     :path => '/',
     :expire_after => 2592000,
     :secret => (1..8).map { ('a'..'z').to_a[rand(26)] }.join
+
+  use Rack::Protection::FormToken
+  set :protection, :session => true
 
   use Rack::Flash
 
@@ -29,11 +34,17 @@ configure do
 
 end
 
+configure :test do
+  require 'rack_session_access'
+  use RackSessionAccess::Middleware
+end
+
 configure :production do
   require 'newrelic_rpm'
 end
 
 helpers do
+
   def t(*args)
     I18n.t(*args)
   end
@@ -45,6 +56,11 @@ helpers do
     end
     "<a href=\"#{url}\" #{attributes}>#{text}</a>"
   end
+
+  def csrf_input_tag
+    %Q(<input type="hidden" name="authenticity_token" value="#{session[:csrf]}" />)
+  end
+
 end
 
 before do
