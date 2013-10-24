@@ -21,8 +21,10 @@ configure do
     :expire_after => 900,
     :secret => (1..8).map { ('a'..'z').to_a[rand(26)] }.join
 
-  use Rack::Protection::FormToken
-  set :protection, :session => true
+  if ENV['RACK_PROTECTION']
+    use Rack::Protection::FormToken
+    set :protection, :session => true
+  end
 
   use Rack::Flash
 
