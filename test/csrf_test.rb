@@ -6,6 +6,8 @@ class CsrfTest < Test::Unit::TestCase
     Sinatra::Application
   end
 
+  # NO TOKEN
+
   def test_signup_fails_without_token
     delete_some_user
     user_count = User.count
@@ -20,6 +22,25 @@ class CsrfTest < Test::Unit::TestCase
     assert_not_equal last_response.status, 200
     assert_equal answer_count, Answer.count
   end
+
+  # TOKEN MISMATCH
+
+  def test_signup_fails_with_token_mismatch
+    delete_some_user
+    user_count = User.count
+    post('/registro', { :email => some_email, :authenticity_token => 'bar' })
+    assert_not_equal last_response.status, 200
+    assert_equal user_count, User.count
+  end
+
+  def test_answer_fails_with_token_mismatch
+    answer_count = Answer.count
+    post('/respuestas', { selected: '1', :authenticity_token => 'bar' })
+    assert_not_equal last_response.status, 200
+    assert_equal answer_count, Answer.count
+  end
+
+  # USING TOKEN
 
   def test_signup_pass_with_token
     user_count = User.count
