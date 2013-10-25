@@ -93,7 +93,7 @@ post '/respuestas' do
   unless option.nil?
     # Embed selected option in the answers record
     selected_option = SelectedOption.new(JSON.parse(option.to_json))
-    Answer.create(selected_option: selected_option)
+    Answer.create(selected_option: selected_option, user_id: session[:csrf])
   end
 
   flash[:finish] = true

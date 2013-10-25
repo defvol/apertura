@@ -55,6 +55,7 @@ class BaseTest < Test::Unit::TestCase
     count_before = Answer.count
     post_with_csrf_protection '/respuestas', selected: '1'
     assert_equal count_before + 1, Answer.count
+    assert_equal @@csrf_token, Answer.last.user_id
   end
 
   def test_it_validates_existence_of_selected_option
