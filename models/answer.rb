@@ -2,6 +2,7 @@ class Answer
   include MongoMapper::Document
 
   one :selected_option
+  key :user_id
 
   timestamps!
 
