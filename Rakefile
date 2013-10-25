@@ -53,6 +53,14 @@ namespace :test do
     task("csrf").execute
   end
 
+  desc "Run stress tests"
+  task :stress do
+    test_task = Rake::TestTask.new("stress") do |t|
+      t.test_files = Dir.glob(File.join("test", "stress_test.rb"))
+    end
+    task("stress").execute
+  end
+
 end
 
 namespace :db do
