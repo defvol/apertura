@@ -26,6 +26,8 @@ configure do
     set :protection, :session => true
   end
 
+  protect_from_rack_attacks
+
   use Rack::Flash
 
   if ENV['MONGODB_URI'].nil?

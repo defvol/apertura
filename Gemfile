@@ -15,6 +15,7 @@ gem 'i18n'
 gem 'mechanize'
 gem 'newrelic_rpm'
 gem 'rack-protection', '>= 1.5.1'
+gem 'rack-attack'
 
 group :development do
   gem 'foreman'

@@ -66,6 +66,8 @@ GEM
     plucky (0.6.6)
       mongo (~> 1.5)
     rack (1.5.2)
+    rack-attack (2.3.0)
+      rack
     rack-flash3 (1.0.5)
       rack
     rack-protection (1.5.1)
@@ -116,6 +118,7 @@ DEPENDENCIES
   mongo
   mongo_mapper (= 0.13.0.beta2)
   newrelic_rpm
+  rack-attack
   rack-flash3
   rack-protection (>= 1.5.1)
   rack-test

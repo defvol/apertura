@@ -6,6 +6,10 @@ class CsrfTest < Test::Unit::TestCase
     Sinatra::Application
   end
 
+  def setup
+    Rack::Attack.clear!
+  end
+
   # NO TOKEN
 
   def test_signup_fails_without_token

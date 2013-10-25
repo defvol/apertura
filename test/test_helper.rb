@@ -52,7 +52,7 @@ class Test::Unit::TestCase
 
   def post_with_csrf_protection(path, options = {})
     params = { 'authenticity_token' => @@csrf_token }.merge(options)
-    post(path, params, 'rack.session' => { :csrf => @@csrf_token })
+    post(path, params, 'rack.session' => { :csrf => params['authenticity_token'] })
   end
 
 end

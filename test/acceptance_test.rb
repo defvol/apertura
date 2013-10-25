@@ -53,6 +53,7 @@ class AcceptanceTest < Test::Unit::TestCase
   def test_it_cycles_ad_infinitum
     visit '/'
     click_link 'option-1'
+    sleep 1.1
     click_link 'option-100'
     page.assert_selector('#option-1')
   end
