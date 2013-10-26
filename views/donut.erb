@@ -1,0 +1,78 @@
+<script src="js/libs/d3.v3.min.js"></script>
+<script>
+var width = d3.select("#chart").style("width").replace("px", ""),
+    height = 500,
+    radius = Math.min(width, height) / 2;
+
+var color = d3.scale.ordinal()
+    .domain(["Economía y finanzas", "Educación", "Crimen y justicia", "Salud", "Energía y medio ambiente", "Geografía", "Democracia y rendición de cuentas", "Movilidad social y bienestar", "Transporte e infraestructura"])
+    .range(["#149496", "#FF6450", "#FAB432", "#3C7DEB", "#96D250", "#323C87", "#B4B4B4", "#818181", "#6E6E6E"]);
+
+var percentage = d3.format("2.2%");
+
+var arc = d3.svg.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(radius - 70);
+
+var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) { return d.count; });
+
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+d3.json("/votes.json", function(error, data) {
+
+  var total = 0;
+  data.forEach(function(d) {
+    d.count = +d.count;
+    total += d.count;
+  });
+
+  var g = svg.selectAll(".arc")
+      .data(pie(data))
+    .enter().append("g")
+      .attr("class", "arc")
+      .attr("data-legend",function(d) { return d.data.category });
+
+  g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return color(d.data.category); });
+
+  g.append("text")
+      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .style("text-anchor", "middle")
+      .text(function(d) { return percentage(d.data.count / total) });
+
+  /* LEGEND */
+
+  color.domain().unshift("Total: " + total + " respuestas");
+
+  var colors = color.domain(),
+      labelHeight = 20,
+      categoriesCount = 10,
+      verticalStart = height / 2 - labelHeight * (categoriesCount / 2);
+
+  var legend = d3.select("svg").selectAll(".legend")
+      .data(colors)
+    .enter().append("g")
+      .attr("transform", function(d, i) {
+        return "translate(" + width / 2 + "," + (verticalStart + i * labelHeight) + ")";
+      });
+
+  legend.append("text")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("dy", ".35em")
+      .style("fill", function(d, i) { return (i == 0)? "#333" : color(d) })
+      .style("font-weight", function(d, i) { return (i == 0)? "bold" : "normal" })
+      .style("text-anchor", "middle")
+      .text(function(d) { return d });
+
+});
+</script>
+
