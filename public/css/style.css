@@ -61,10 +61,14 @@ i {
 
 p.lead {
   font-style: italic;
+  margin-bottom: 30px;
 }
 
 p.legend {
   font-size: 12px;
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 10px;
 }
 
 footer {
@@ -79,6 +83,18 @@ a.green {
 
 a.purple {
   color: #170F85;
+}
+
+
+.poll-action-wrapper {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.poll-action-wrapper a {
+  background-color: #333;
+  color: white;
+  padding: 5px;
 }
 
 /* Buttons */
@@ -170,11 +186,6 @@ div.tooltip {
   shape-rendering: crispEdges;
 }
 
-.poll-action-wrapper {
-  padding-top: 10px;
-  text-align: right;
-}
-
 /* Bar chart */
 
 rect.bar {
@@ -190,4 +201,8 @@ rect.bar {
 }
 
 svg text { font-size: 12px }
+
+/* Donut */
+
+.arc text { fill: white }
 
