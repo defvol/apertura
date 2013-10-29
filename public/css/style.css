@@ -71,6 +71,13 @@ p.legend {
   margin-bottom: 10px;
 }
 
+.form-wrapper {
+  background-color: #999;
+  color: white;
+}
+
+.form-wrapper p.lead { text-align: left }
+
 footer {
   background-color: #333;
   color: #fff;
