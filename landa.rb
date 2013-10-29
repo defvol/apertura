@@ -128,7 +128,7 @@ post '/registro' do
     haml :confirmation, locals: { email: user.email }
   else
     flash[:error] = user.errors.full_messages.join(",")
-    redirect "/"
+    haml :results
   end
 end
 
