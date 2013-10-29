@@ -7,6 +7,9 @@
     - locals[:options].each do |option|
       %li(class="poll-option-wrapper")
         %a(class="poll-option btn-3d #{session[:color]}" href="#" id="option-#{option.pseudo_uid}")= option.text
+      %div.hr
+        %span.versus
+          v.s.
 
 - if flash[:finish]
   %p.poll-action-wrapper

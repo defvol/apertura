@@ -1,3 +1,7 @@
+.form-wrapper
+  .container
+    = haml :form
+
 .container
   %p.lead= t('poll.results.header')
 
@@ -6,10 +10,6 @@
 
   %p.poll-action-wrapper
     %a(href="/" id="poll-reboot" class="#{session[:color]}")= t('poll.actions.reboot')
-
-%footer
-  .container
-    = haml :form
 
 = erb :donut
 
