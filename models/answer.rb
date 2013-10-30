@@ -19,5 +19,18 @@ class Answer
     ])
   end
 
+  def self.datasets
+    Answer.collection.aggregate([
+      { "$match" => { "selected_option.parent_uid" => { "$exists" => true } } },
+      { "$group" => {
+          _id: "$selected_option.text",
+          count: { "$sum" => 1 } } },
+      { "$project" => {
+          "dataset" => "$_id",
+          "count" => 1,
+          "_id" => 0 } }
+    ])
+  end
+
 end
 
