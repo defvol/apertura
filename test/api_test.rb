@@ -6,6 +6,12 @@ class ApiTest < Test::Unit::TestCase
     Sinatra::Application
   end
 
+  def setup
+    set_some_poll_options
+    Answer.delete_all
+    save_some_answers
+  end
+
   def save_some_requests
     delete_some_user
     @requests = [
@@ -23,26 +29,38 @@ class ApiTest < Test::Unit::TestCase
     @early_adopter.save
   end
 
-  def save_some_answers
-    option = Option.where(pseudo_uid: 1).all.first
-    selected = SelectedOption.new(JSON.parse(option.to_json))
-    5.times { Answer.create(selected_option: JSON.parse(selected.to_json)) }
+  def select_option(id)
+    option = Option.where(pseudo_uid: id).all.first
+    SelectedOption.new(JSON.parse(option.to_json)).to_json
+  end
 
-    option = Option.where(pseudo_uid: 100).all.first
-    selected = SelectedOption.new(JSON.parse(option.to_json))
-    Answer.create(selected_option: JSON.parse(selected.to_json))
+  def save_some_answers
+    5.times { Answer.create(selected_option: JSON.parse(select_option(1))) }
+    2.times { Answer.create(selected_option: JSON.parse(select_option(100))) }
+    3.times { Answer.create(selected_option: JSON.parse(select_option(101))) }
   end
 
   def test_it_returns_data_requests_by_category
-    set_some_poll_options
-    Answer.delete_all
-    save_some_answers
-
     get '/votes.json'
     response = [
       {
         count: 5,
         category: "Lorem ipsum"
+      }
+    ]
+    assert_equal response.to_json, last_response.body
+  end
+
+  def test_it_returns_dataset_results
+    get '/answers/datasets.json'
+    response = [
+      {
+        count: 3,
+        dataset: Option.where(pseudo_uid: 101).all.first.text
+      },
+      {
+        count: 2,
+        dataset: Option.where(pseudo_uid: 100).all.first.text
       }
     ]
     assert_equal response.to_json, last_response.body

@@ -12,19 +12,22 @@ class BaseTest < Test::Unit::TestCase
   end
 
   def test_that_email_cant_be_blank
+    count = User.count
     post_with_csrf_protection '/registro'
-    assert_not_equal last_response.status, 200
+    assert_equal count, User.count
   end
 
   def test_email_uniqueness
     delete_some_user
+    count = User.count
     2.times { post_with_csrf_protection '/registro', { :email => some_email } }
-    assert_not_equal last_response.status, 200
+    assert_equal count + 1, User.count
   end
 
   def test_email_validation
+    count = User.count
     post_with_csrf_protection '/registro', { email: 'bar' }
-    assert_not_equal last_response.status, 200
+    assert_equal count, User.count
   end
 
   def test_embedded_data_request
