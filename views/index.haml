@@ -1,3 +1,11 @@
 .container
-  La encuesta ha terminado. ¡Gracias por participar!
+  %p.lead= t('poll.closure.bar.title')
+
+  %p.lead= t('poll.closure.area.title')
+
+  %p= t('poll.closure.area.footnote')
+
+  %p.poll-action-wrapper
+    %a(href="/datatron")= t('poll.closure.data')
+    %a(href="/datatron")= t('poll.closure.method')
 

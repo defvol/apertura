@@ -66,7 +66,6 @@ p.lead {
 
 p.legend {
   font-size: 12px;
-  text-align: center;
   padding-top: 20px;
   margin-bottom: 10px;
 }
@@ -76,7 +75,7 @@ p.legend {
   color: white;
 }
 
-.form-wrapper p.lead { text-align: left }
+.container.poll, .container.results { text-align: center }
 
 footer {
   background-color: #333;
@@ -95,13 +94,14 @@ a.purple {
 
 .poll-action-wrapper {
   padding-top: 20px;
-  text-align: center;
 }
 
 .poll-action-wrapper a {
   background-color: #333;
   color: white;
-  padding: 5px;
+  padding: 10px;
+  margin-right: 10px;
+  text-transform: uppercase;
 }
 
 div.hr {

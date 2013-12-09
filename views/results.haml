@@ -2,7 +2,7 @@
   .container
     = haml :form
 
-.container
+.container.results
   %p.lead= t('poll.results.header')
 
   #chart(class="#{session[:color]}")

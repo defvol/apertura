@@ -20,7 +20,6 @@ input, select, i {
 }
 
 p { font-size: 12px }
-p.lead { text-align: center }
 
 #new-data-request { display: none }
 
@@ -37,7 +36,6 @@ p.lead { text-align: center }
 
   .btn-3d { font-size: 22px }
   .logo img { width: 80px }
-  .lead { text-align: left }
 
   p { font-size: 14px }
 }
