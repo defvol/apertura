@@ -82,9 +82,13 @@ not_found do
 end
 
 get '/' do
+  haml :index
+end
+
+get '/datatron' do
   session[:color] = pick_color
   options = Poll.new.pick(2)
-  haml :index, locals: { options: options }
+  haml :datatron, locals: { options: options }
 end
 
 post '/respuestas' do
@@ -99,9 +103,9 @@ post '/respuestas' do
   flash[:finish] = true
   options = Poll.new.pick(2, params[:selected].to_i)
   if options.empty?
-    redirect '/'
+    redirect '/datatron'
   else
-    haml :index, locals: { options: options }
+    haml :datatron, locals: { options: options }
   end
 end
 
