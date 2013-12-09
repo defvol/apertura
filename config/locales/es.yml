@@ -36,6 +36,14 @@ es:
     actions:
       finish: Terminar la encuesta
       reboot: Seguir con la encuesta
+    closure:
+      area:
+        footnote: 'Periodo de la encuesta: 23 de octubre a 26 de noviembre, 2013'
+        title: Número de respuestas por día de todos los temas
+      bar:
+        title: Preferencias finales de apertura de datos por tema
+      data: Descarga la base de datos
+      method: Metodología de la encuesta
     lead: ¿Qué dato del gobierno te gustaría conocer?
     results:
       header: Resultados de todos los participantes de la encuesta
