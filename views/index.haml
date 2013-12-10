@@ -3,6 +3,7 @@
   #chart
 
   %p.lead= t('poll.closure.area.title')
+  #area
 
   %p= t('poll.closure.area.footnote')
 
@@ -10,4 +11,7 @@
     %a(href="/datatron")= t('poll.closure.data')
     %a(href="https://docs.google.com/document/d/1o9OK54l2L1bFvS0jS1RUoyqV1qnCot4klRcmBVMGQHc/edit?usp=sharing")= t('poll.closure.method')
 
+%script(src="http://d3js.org/d3.v3.min.js")
 = erb :bar
+= erb :area
+
