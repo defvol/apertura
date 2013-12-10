@@ -66,5 +66,28 @@ class ApiTest < Test::Unit::TestCase
     assert_equal response.to_json, last_response.body
   end
 
+  def test_it_returns_votes_per_day
+    some_day = "2013-12-10T17:42:24Z"
+    Answer.all.each do |a|
+      a.created_at = Time.iso8601(some_day)
+      a.save
+    end
+    a = Answer.last
+    a.created_at = Time.iso8601(some_day) - 1.day
+    a.save
+    response = [
+      {
+        count: 1,
+        date: '2013-12-09'
+      },
+      {
+        count: Answer.count - 1,
+        date: '2013-12-10'
+      }
+    ]
+    get '/answers/daily.json'
+    assert_equal response.to_json, last_response.body
+  end
+
 end
 

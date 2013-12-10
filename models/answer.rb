@@ -32,5 +32,22 @@ class Answer
     ])
   end
 
+  def self.daily
+    Answer.collection.aggregate([
+      { "$group" => {
+        _id: {
+          year:   { "$year" => "$created_at" },
+          month:  { "$month" => "$created_at" },
+          day:    { "$dayOfMonth" => "$created_at" } },
+        dt_sample: { "$first" => "$created_at" },
+        count: { "$sum" => 1 } } },
+      { "$sort" => { dt_sample: 1 } },
+      { "$project" => {
+        "date" => { "$substr" => ["$dt_sample", 0, 10] },
+        "count" => 1,
+        "_id" => 0 } }
+    ])
+  end
+
 end
 
