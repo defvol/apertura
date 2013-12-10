@@ -227,6 +227,8 @@ rect.bar {
 
 svg text { font-size: 12px }
 
+svg .axis-label, svg .bar-title { font-size: 10px; }
+
 /* Donut */
 
 .arc text { fill: white }

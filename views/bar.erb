@@ -1,45 +1,62 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var margin = { top: 10, bottom: 10 },
+var margin = { top: 40, bottom: 120 },
     height = 500 - margin.top - margin.bottom;
 
-var formatPercent = d3.format(".0%");
+var formatPercent = d3.format(".2%");
+var color = d3.scale.ordinal()
+    .domain(["Economía y finanzas", "Educación", "Crimen y justicia", "Salud", "Energía y medio ambiente", "Geografía", "Democracia y rendición de cuentas", "Movilidad social y bienestar", "Transporte e infraestructura"])
+    .range(["#149496", "#FF6450", "#FAB432", "#3C7DEB", "#96D250", "#323C87", "#B4B4B4", "#818181", "#6E6E6E"]);
 
-var svg = d3.select("#chart").append("svg")
+var chart = d3.select("#chart").append("svg")
     .attr("width", "100%")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var width = d3.select("#chart").style("width");
+var width = parseInt(d3.select("#chart").style("width"));
 
-var x = d3.scale.linear()
-  .range([0, width]);
-
-var y = d3.scale.ordinal()
-  .rangeRoundBands([0, height], .50);
+var y = d3.scale.linear()
+  .range([height, margin.top]);
 
 d3.json("/votes.json", function(error, data) {
 
-  x.domain([0, d3.max(data, function(d) { return d.count; })]);
-  y.domain(data.map(function(d) { return d.category; }));
+  var total = 0;
+  data.forEach(function(d) {
+    d.count = +d.count;
+    total += d.count;
+  });
 
-  svg.selectAll(".bar")
-      .data(data)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return 0; })
-      .attr("width", function(d) { return x(d.count); })
-      .attr("y", function(d) { return y(d.category); })
-      .attr("height", y.rangeBand())
+  y.domain([0, d3.max(data, function(d) { return d.count; })]);
 
-  svg.selectAll("text")
+  var barWidth = width / data.length;
+
+  var bar = chart.selectAll("g")
       .data(data)
-    .enter().append("text")
-      .attr("x", function(d) { return 1; })
-      .attr("y", function(d) { return y(d.category) + y.rangeBand() + 14; })
-      .text(function(d) { return d.category });
+    .enter().append("g")
+      .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
+
+  bar.append("rect")
+    .attr("class", "bar")
+    .attr("y", function(d) { return y(d.count); })
+    .attr("height", function(d) { return height - y(d.count); })
+    .attr("width", barWidth - 4)
+    .style("fill", function(d) { return color(d.category); });
+
+  bar.append("text")
+    .attr("class", "bar-title")
+    .attr("x", 0)
+    .attr("y", function(d) { return y(d.count) - 10 })
+    .text(function(d) { return formatPercent(d.count / total) });
+
+  bar.append("foreignObject")
+      .attr("width", barWidth - 4)
+      .attr("height", 200)
+      .attr("y", function(d) { return height + 10; })
+    .append("xhtml:body")
+      .html(function(d) { return "<span class='axis-label' style='color:" + color(d.category) + "'>" + d.category + "</span>" });
+
 });
 
 </script>
