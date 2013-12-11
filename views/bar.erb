@@ -1,7 +1,7 @@
 <script>
 
 var margin = { top: 40, bottom: 120 },
-    height = 500 - margin.top - margin.bottom;
+    height = 560 - margin.top - margin.bottom;
 
 var formatPercent = d3.format(".2%");
 var color = d3.scale.ordinal()
@@ -17,7 +17,7 @@ var chart = d3.select("#chart").append("svg")
 var width = parseInt(d3.select("#chart").style("width"));
 
 var y = d3.scale.linear()
-  .range([height, margin.top]);
+  .range([height, 0]);
 
 d3.json("/votes.json", function(error, data) {
 
@@ -34,7 +34,7 @@ d3.json("/votes.json", function(error, data) {
   var bar = chart.selectAll("g")
       .data(data)
     .enter().append("g")
-      .attr("transform", function(d, i) { return "translate(" + i * barWidth + ",0)"; });
+      .attr("transform", function(d, i) { return "translate(" + i * barWidth + "," + margin.top + ")"; });
 
   bar.append("rect")
     .attr("class", "bar")

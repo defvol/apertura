@@ -76,6 +76,7 @@ p.legend {
 }
 
 .container.poll, .container.results { text-align: center }
+.container.landing { padding-top: 60px; padding-bottom: 60px; }
 
 footer {
   background-color: #333;
