@@ -34,6 +34,7 @@ class Answer
 
   def self.daily
     Answer.collection.aggregate([
+      { "$match" => { "selected_option.parent_uid" => { "$exists" => false } } },
       { "$group" => {
         _id: {
           year:   { "$year" => "$created_at" },

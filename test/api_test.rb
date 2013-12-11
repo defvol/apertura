@@ -67,22 +67,17 @@ class ApiTest < Test::Unit::TestCase
   end
 
   def test_it_returns_votes_per_day
-    some_day = "2013-12-10T17:42:24Z"
-    Answer.all.each do |a|
-      a.created_at = Time.iso8601(some_day)
-      a.save
-    end
-    a = Answer.last
-    a.created_at = Time.iso8601(some_day) - 1.day
+    a = Answer.create(selected_option: JSON.parse(select_option(1)))
+    a.created_at = Time.now - 1.day
     a.save
     response = [
       {
         count: 1,
-        date: '2013-12-09'
+        date: (Time.now.utc - 1.day).strftime("%Y-%m-%d")
       },
       {
-        count: Answer.count - 1,
-        date: '2013-12-10'
+        count: 5,
+        date: Time.now.utc.strftime("%Y-%m-%d")
       }
     ]
     get '/answers/daily.json'
