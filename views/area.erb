@@ -5,9 +5,9 @@
 // Apparently, #area inherits width from the container and #chart
 var clientWidth = parseInt(d3.select("#area").style("width"));
 
-var margin = { top: 40, right: 0, bottom: 40, left: 40 },
-    height = 500 - margin.top - margin.bottom,
-    width = clientWidth - margin.left - margin.right;
+var areaMargin = { top: 40, right: 0, bottom: 40, left: 40 },
+    areaHeight = 500 - areaMargin.top - areaMargin.bottom,
+    areaWidth = clientWidth - areaMargin.left - areaMargin.right;
 
 var iso = d3.time.format.utc("%Y-%m-%d");
 var dayFormat = d3.time.format("%d");
@@ -15,26 +15,23 @@ var dayFormat = d3.time.format("%d");
 // Main SVG
 
 var svg = d3.select("#area").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", areaWidth + areaMargin.left + areaMargin.right)
+    .attr("height", areaHeight + areaMargin.top + areaMargin.bottom)
   .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + areaMargin.left + "," + areaMargin.top + ")");
 
 // Scales
 
-var x = d3.time.scale().range([0, width]),
-    y = d3.scale.linear().range([height, 0]);
+var x = d3.time.scale().range([0, areaWidth]),
+    y = d3.scale.linear().range([areaHeight, 0]);
 
 // An area generator
 
 var areaGenerator = d3.svg.area()
   .interpolate("linear")
-  .x(function(d) {
-    return x(d.date)
-  })
-  .y0(height)
-  .y1(function(d) {
-    return y(d.count) });
+  .x(function(d) { return x(d.date) })
+  .y0(areaHeight)
+  .y1(function(d) { return y(d.count) });
 
 d3.json("/answers/daily.json", function(error, data) {
 
@@ -64,7 +61,7 @@ d3.json("/answers/daily.json", function(error, data) {
 
   svg.append("g")
       .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
+      .attr("transform", "translate(0," + areaHeight + ")")
       .call(xAxis);
 
   svg.append("g")
