@@ -84,5 +84,24 @@ class ApiTest < Test::Unit::TestCase
     assert_equal response.to_json, last_response.body
   end
 
+  def test_it_returns_dump_of_chosen_categories
+    t = Time.now.utc
+    Answer.all.each do |a|
+      a.created_at = t
+      a.save
+    end
+    a = Answer.create(selected_option: JSON.parse(select_option(1)))
+    a.created_at = t - 1.day
+    a.save
+
+    response = [
+      { fecha: a.created_at, respuesta: "Lorem ipsum" }
+    ]
+    5.times { response << { fecha: t, respuesta: "Lorem ipsum" } }
+
+    get '/answers/categories_dump.json'
+    assert_equal response.to_json, last_response.body
+  end
+
 end
 

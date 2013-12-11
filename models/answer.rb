@@ -50,5 +50,16 @@ class Answer
     ])
   end
 
+  def self.entries
+    Answer.collection.aggregate([
+      { "$match" => { "selected_option.parent_uid" => { "$exists" => false } } },
+      { "$sort" => { created_at: 1 } },
+      { "$project" => {
+        "fecha" => "$created_at",
+        "respuesta" => "$selected_option.text",
+        "_id" => 0 } }
+    ])
+  end
+
 end
 

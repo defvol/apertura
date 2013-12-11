@@ -125,6 +125,10 @@ get '/answers/daily.json' do
   Answer.daily.to_json
 end
 
+get '/answers/categories_dump.json' do
+  Answer.entries.to_json
+end
+
 get '/privacidad' do
   haml :privacy
 end
