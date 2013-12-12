@@ -6,8 +6,26 @@ class Answer
 
   timestamps!
 
-  def self.votes_by_category
+  # A scope replica
+  # Receives date-strings and setups query parameters
+  def self.between_dates(low, high)
+    begin
+      from = Time.parse(low)
+      to = Time.parse(high)
+    rescue ArgumentError, TypeError
+      from ||= Time.new(0)
+      to ||= Time.now
+    end
+
+    { "$match" => {
+      "created_at" => {
+        "$gte" => from,
+        "$lte" => to } } }
+  end
+
+  def self.votes_by_category(from, to)
     Answer.collection.aggregate([
+      between_dates(from, to),
       { "$match" => { "selected_option.parent_uid" => { "$exists" => false } } },
       { "$group" => {
           _id: "$selected_option.text",
@@ -32,8 +50,9 @@ class Answer
     ])
   end
 
-  def self.daily
+  def self.daily(from, to)
     Answer.collection.aggregate([
+      between_dates(from, to),
       { "$match" => { "selected_option.parent_uid" => { "$exists" => false } } },
       { "$group" => {
         _id: {

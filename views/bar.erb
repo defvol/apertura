@@ -19,7 +19,10 @@ var width = parseInt(d3.select("#chart").style("width"));
 var y = d3.scale.linear()
   .range([height, 0]);
 
-d3.json("/votes.json", function(error, data) {
+var from  = "2013-10-23T00:00:00-06:00",
+    to    = "2013-11-16T23:59:59-05:00";
+
+d3.json("/votes.json?from=" + from + "&to=" + to, function(error, data) {
 
   var total = 0;
   data.forEach(function(d) {

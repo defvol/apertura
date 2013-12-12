@@ -10,6 +10,12 @@ class ApiTest < Test::Unit::TestCase
     set_some_poll_options
     Answer.delete_all
     save_some_answers
+
+    # Timeframe
+    @from = '2013-10-23T00:00:00-06:00'
+    @to = '2013-11-16T23:59:59-05:00'
+    @from_date = Time.new(2013, 10, 23, 00, 00, 00, "-06:00")
+    @to_date = Time.new(2013, 11, 16, 23, 59, 59, "-05:00")
   end
 
   def save_some_requests
@@ -29,48 +35,45 @@ class ApiTest < Test::Unit::TestCase
     @early_adopter.save
   end
 
-  def select_option(id)
-    option = Option.where(pseudo_uid: id).all.first
-    SelectedOption.new(JSON.parse(option.to_json)).to_json
-  end
-
-  def save_some_answers
-    5.times { Answer.create(selected_option: JSON.parse(select_option(1))) }
-    2.times { Answer.create(selected_option: JSON.parse(select_option(100))) }
-    3.times { Answer.create(selected_option: JSON.parse(select_option(101))) }
-  end
-
-  def test_it_returns_data_requests_by_category
+  def test_it_returns_votes_by_category
     get '/votes.json'
-    response = [
+    assert_response_equals([
       {
         count: 5,
         category: "Lorem ipsum"
       }
-    ]
-    assert_equal response.to_json, last_response.body
+    ])
+  end
+
+  def test_it_returns_votes_by_category_in_time_range
+    create_answer_at_date(@from_date + 1.day)
+    get "/votes.json?from=#{@from}&to=#{@to}"
+    assert_response_equals([
+      {
+        count: 1,
+        category: "Lorem ipsum"
+      }
+    ])
   end
 
   def test_it_returns_dataset_results
     get '/answers/datasets.json'
-    response = [
-      {
-        count: 3,
-        dataset: Option.where(pseudo_uid: 101).all.first.text
-      },
+    assert_response_equals([
       {
         count: 2,
         dataset: Option.where(pseudo_uid: 100).all.first.text
+      },
+      {
+        count: 3,
+        dataset: Option.where(pseudo_uid: 101).all.first.text
       }
-    ]
-    assert_equal response.to_json, last_response.body
+    ])
   end
 
   def test_it_returns_votes_per_day
-    a = Answer.create(selected_option: JSON.parse(select_option(1)))
-    a.created_at = Time.now - 1.day
-    a.save
-    response = [
+    create_answer_at_date(Time.now - 1.day)
+    get '/answers/daily.json'
+    assert_response_equals([
       {
         count: 1,
         date: (Time.now.utc - 1.day).strftime("%Y-%m-%d")
@@ -79,28 +82,50 @@ class ApiTest < Test::Unit::TestCase
         count: 5,
         date: Time.now.utc.strftime("%Y-%m-%d")
       }
-    ]
-    get '/answers/daily.json'
-    assert_equal response.to_json, last_response.body
+    ])
+  end
+
+  def test_it_returns_daily_votes_in_time_range
+    # Mocks with fixed creation date
+    [
+      Time.new(2013, 10, 22, 00, 00, 00, "-06:00"),
+      @from_date,
+      @to_date - 1.day,
+      Time.new(2013, 11, 17, 23, 59, 59, "-05:00")
+    ].each { |d| create_answer_at_date(d) }
+
+    get "/answers/daily.json?from=#{@from}&to=#{@to}"
+    assert_response_equals([
+      {
+        count: 1,
+        date: @from_date.strftime("%Y-%m-%d")
+      },
+      {
+        count: 1,
+        date: @to_date.strftime("%Y-%m-%d")
+      }
+    ])
   end
 
   def test_it_returns_dump_of_chosen_categories
-    t = Time.now.utc
+    now = Time.now.utc
     Answer.all.each do |a|
-      a.created_at = t
+      a.created_at = now
       a.save
     end
-    a = Answer.create(selected_option: JSON.parse(select_option(1)))
-    a.created_at = t - 1.day
-    a.save
 
-    response = [
-      { fecha: a.created_at, respuesta: "Lorem ipsum" }
-    ]
-    5.times { response << { fecha: t, respuesta: "Lorem ipsum" } }
+    before_date = now - 1.day
+    create_answer_at_date(before_date)
 
     get '/answers/categories_dump.json'
-    assert_equal response.to_json, last_response.body
+    assert_response_equals([
+      { fecha: before_date, respuesta: "Lorem ipsum" },
+      { fecha: now, respuesta: "Lorem ipsum" },
+      { fecha: now, respuesta: "Lorem ipsum" },
+      { fecha: now, respuesta: "Lorem ipsum" },
+      { fecha: now, respuesta: "Lorem ipsum" },
+      { fecha: now, respuesta: "Lorem ipsum" }
+    ])
   end
 
 end

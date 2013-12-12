@@ -38,7 +38,7 @@ es:
       reboot: Seguir con la encuesta
     closure:
       area:
-        footnote: 'Periodo de la encuesta: 23 de octubre a 26 de noviembre, 2013'
+        footnote: 'Periodo de la encuesta: 23 de octubre a 16 de noviembre, 2013'
         title: Número de respuestas por día de todos los temas
       bar:
         title: Preferencias finales de apertura de datos por tema

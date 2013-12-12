@@ -114,7 +114,7 @@ get '/resultados' do
 end
 
 get '/votes.json' do
-  Answer.votes_by_category.to_json
+  Answer.votes_by_category(params[:from], params[:to]).to_json
 end
 
 get '/answers/datasets.json' do
@@ -122,7 +122,7 @@ get '/answers/datasets.json' do
 end
 
 get '/answers/daily.json' do
-  Answer.daily.to_json
+  Answer.daily(params[:from], params[:to]).to_json
 end
 
 get '/answers/categories_dump.json' do

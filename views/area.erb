@@ -9,7 +9,7 @@ var areaMargin = { top: 40, right: 0, bottom: 40, left: 40 },
     areaHeight = 500 - areaMargin.top - areaMargin.bottom,
     areaWidth = clientWidth - areaMargin.left - areaMargin.right;
 
-var iso = d3.time.format.utc("%Y-%m-%d");
+var iso = d3.time.format("%Y-%m-%d%Z");
 var dayFormat = d3.time.format("%d");
 
 // Main SVG
@@ -33,10 +33,16 @@ var areaGenerator = d3.svg.area()
   .y0(areaHeight)
   .y1(function(d) { return y(d.count) });
 
-d3.json("/answers/daily.json", function(error, data) {
+var from  = "2013-10-23T00:00:00-06:00",
+    to    = "2013-11-16T23:59:59-05:00";
+
+d3.json("/answers/daily.json?from=" + from + "&to=" + to, function(error, data) {
+
+  // Parse dates
 
   data.forEach(function(d) {
-    d.date = iso.parse(d.date);
+    // Adjust dates to our local timezone, GMT-0500 (CDT)
+    d.date = iso.parse(d.date + "+0500");
   });
 
   dateRange = d3.extent(data, function(d) { return d.date; });
