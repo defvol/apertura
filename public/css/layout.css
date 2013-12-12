@@ -23,6 +23,20 @@ p { font-size: 12px }
 
 #new-data-request { display: none }
 
+svg .axis-label {
+  visibility: collapse;
+}
+
+#chart svg.bar-chart {
+  height: 540px;
+}
+
+#chart svg.legend {
+  height: 260px;
+  width: 300px;
+  visibility: visible;
+}
+
 /* Responsive: Portrait tablets and up */
 
 @media screen and (min-width: 768px) {
@@ -38,6 +52,19 @@ p { font-size: 12px }
   .logo img { width: 80px }
 
   p { font-size: 14px }
+
+  svg .axis-label {
+    visibility: visible;
+  }
+
+  #chart svg.bar-chart {
+    height: 680px;
+  }
+
+  #chart svg.legend {
+    height: 0;
+    visibility: collapse;
+  }
 }
 
 @media screen and (min-width: 992px) {
