@@ -55,5 +55,26 @@ class Test::Unit::TestCase
     post(path, params, 'rack.session' => { :csrf => params['authenticity_token'] })
   end
 
+  def select_option(id)
+    option = Option.where(pseudo_uid: id).all.first
+    SelectedOption.new(JSON.parse(option.to_json)).to_json
+  end
+
+  def save_some_answers
+    5.times { Answer.create(selected_option: JSON.parse(select_option(1))) }
+    2.times { Answer.create(selected_option: JSON.parse(select_option(100))) }
+    3.times { Answer.create(selected_option: JSON.parse(select_option(101))) }
+  end
+
+  def assert_response_equals(response)
+    assert_equal response.to_json, last_response.body
+  end
+
+  def create_answer_at_date(date)
+    a = Answer.create(selected_option: JSON.parse(select_option(1)))
+    a.created_at = date
+    a.save
+  end
+
 end
 

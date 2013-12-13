@@ -20,15 +20,28 @@ input, select, i {
 }
 
 p { font-size: 12px }
-p.lead { text-align: center }
 
 #new-data-request { display: none }
+
+svg .axis-label {
+  visibility: collapse;
+}
+
+#chart svg.bar-chart {
+  height: 540px;
+}
+
+#chart svg.legend {
+  height: 260px;
+  width: 300px;
+  visibility: visible;
+}
 
 /* Responsive: Portrait tablets and up */
 
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 700px;
+    max-width: 750px;
   }
 
   i {
@@ -37,9 +50,21 @@ p.lead { text-align: center }
 
   .btn-3d { font-size: 22px }
   .logo img { width: 80px }
-  .lead { text-align: left }
 
   p { font-size: 14px }
+
+  svg .axis-label {
+    visibility: visible;
+  }
+
+  #chart svg.bar-chart {
+    height: 680px;
+  }
+
+  #chart svg.legend {
+    height: 0;
+    visibility: collapse;
+  }
 }
 
 @media screen and (min-width: 992px) {

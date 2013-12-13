@@ -14,8 +14,16 @@ class AcceptanceTest < Test::Unit::TestCase
     page.set_rack_session({ csrf: @@csrf_token })
   end
 
-  def test_it_can_add_new_fields
+  def visit_poll
+    visit '/datatron'
+  end
+
+  def visit_results
     visit '/resultados'
+  end
+
+  def test_it_can_add_new_fields
+    visit_results
     page.driver.browser.manage.window.resize_to(1000, 500)
     click_link 'new-data-request'
     assert_equal 2, all('.data-request').count
@@ -24,7 +32,7 @@ class AcceptanceTest < Test::Unit::TestCase
   def test_it_signups
     delete_some_user
 
-    visit '/resultados'
+    visit_results
     signup
 
     assert_equal '/registro', current_path
@@ -35,7 +43,7 @@ class AcceptanceTest < Test::Unit::TestCase
   def test_it_trims_empty_requests
     delete_some_user
 
-    visit '/resultados'
+    visit_results
     signup
 
     assert_equal 0, some_user.data_requests.count
@@ -44,14 +52,14 @@ class AcceptanceTest < Test::Unit::TestCase
   def test_it_can_submit_answer_form_by_click
     set_some_poll_options
     count_before = Answer.count
-    visit '/'
+    visit_poll
     click_link 'option-1'
     assert_equal '/respuestas', current_path
     assert_equal count_before + 1, Answer.count
   end
 
   def test_it_cycles_ad_infinitum
-    visit '/'
+    visit_poll
     click_link 'option-1'
     sleep 1.1
     click_link 'option-100'
@@ -59,14 +67,20 @@ class AcceptanceTest < Test::Unit::TestCase
   end
 
   def test_that_user_may_finish_poll
-    visit '/'
+    visit_poll
     click_link 'option-1'
     click_link 'poll-finish'
     assert_equal '/resultados', current_path
   end
 
+  def test_that_user_may_restart_poll
+    visit_results
+    click_link 'poll-reboot'
+    assert_equal '/datatron', current_path
+  end
+
   def test_it_fails_with_token_mismatch
-    visit '/'
+    visit_poll
     page.set_rack_session({ csrf: 'ye olde key' })
     assert_raise Capybara::ElementNotFound do
       click_link 'option-1'
@@ -75,7 +89,7 @@ class AcceptanceTest < Test::Unit::TestCase
 
   def test_it_ensures_that_token_is_set_for_new_users
     page.set_rack_session({})
-    visit '/'
+    visit_poll
     assert_not_equal nil, page.get_rack_session_key('csrf')
   end
 

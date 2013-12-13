@@ -66,7 +66,6 @@ p.lead {
 
 p.legend {
   font-size: 12px;
-  text-align: center;
   padding-top: 20px;
   margin-bottom: 10px;
 }
@@ -76,7 +75,8 @@ p.legend {
   color: white;
 }
 
-.form-wrapper p.lead { text-align: left }
+.container.poll, .container.results { text-align: center }
+.container.landing { padding-top: 60px; padding-bottom: 60px; }
 
 footer {
   background-color: #333;
@@ -95,13 +95,14 @@ a.purple {
 
 .poll-action-wrapper {
   padding-top: 20px;
-  text-align: center;
 }
 
 .poll-action-wrapper a {
   background-color: #333;
   color: white;
-  padding: 5px;
+  padding: 10px;
+  margin-right: 10px;
+  text-transform: uppercase;
 }
 
 div.hr {
@@ -206,8 +207,8 @@ div.tooltip {
 
 .axis path, .axis line {
   fill: none;
-  stroke: #000;
-  stroke-width: 2px;
+  stroke: #333;
+  stroke-width: 1px;
   shape-rendering: crispEdges;
 }
 
@@ -227,7 +228,18 @@ rect.bar {
 
 svg text { font-size: 12px }
 
+svg .axis-label, svg .bar-title { font-size: 10px; }
+
 /* Donut */
 
 .arc text { fill: white }
 
+/* Area chart */
+
+path.area {
+  fill: #2DFEFE;
+}
+
+path.domain {
+  stroke-width: 0;
+}

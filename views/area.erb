@@ -1,0 +1,81 @@
+<script>
+
+// Layout
+
+// Apparently, #area inherits width from the container and #chart
+var clientWidth = parseInt(d3.select("#area").style("width"));
+
+var areaMargin = { top: 40, right: 0, bottom: 40, left: 40 },
+    areaHeight = 500 - areaMargin.top - areaMargin.bottom,
+    areaWidth = clientWidth - areaMargin.left - areaMargin.right;
+
+var iso = d3.time.format("%Y-%m-%d%Z");
+var dayFormat = d3.time.format("%d");
+
+// Main SVG
+
+var svg = d3.select("#area").append("svg")
+    .attr("width", areaWidth + areaMargin.left + areaMargin.right)
+    .attr("height", areaHeight + areaMargin.top + areaMargin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + areaMargin.left + "," + areaMargin.top + ")");
+
+// Scales
+
+var x = d3.time.scale().range([0, areaWidth]),
+    y = d3.scale.linear().range([areaHeight, 0]);
+
+// An area generator
+
+var areaGenerator = d3.svg.area()
+  .interpolate("linear")
+  .x(function(d) { return x(d.date) })
+  .y0(areaHeight)
+  .y1(function(d) { return y(d.count) });
+
+var from  = "2013-10-23T00:00:00-06:00",
+    to    = "2013-11-16T23:59:59-05:00";
+
+d3.json("/answers/daily.json?from=" + from + "&to=" + to, function(error, data) {
+
+  // Parse dates
+
+  data.forEach(function(d) {
+    // Adjust dates to our local timezone, GMT-0500 (CDT)
+    d.date = iso.parse(d.date + "+0500");
+  });
+
+  dateRange = d3.extent(data, function(d) { return d.date; });
+  x.domain(dateRange);
+  y.domain([0, d3.max(data, function(d) { return d.count; }) + 10]);
+
+  svg.append("path")
+    .datum(data)
+    .attr("class", "area")
+    .attr("d", areaGenerator);
+
+  // Axis
+
+  var xAxis = d3.svg.axis()
+        .scale(x)
+        .ticks(d3.time.days, dateRange)
+        .tickFormat(dayFormat)
+        .orient("bottom"),
+      yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left");
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + areaHeight + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate(0,0)")
+      .call(yAxis);
+
+});
+
+</script>
+

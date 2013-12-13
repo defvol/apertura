@@ -1,3 +1,17 @@
-.container
-  = haml :poll, locals: locals
+.container.landing
+  %p.lead= t('poll.closure.bar.title')
+  #chart
+
+  %p.lead= t('poll.closure.area.title')
+  #area
+
+  %p= t('poll.closure.area.footnote')
+
+  %p.poll-action-wrapper
+    %a(href="/answers/categories_dump.json")= t('poll.closure.data')
+    %a(href="https://docs.google.com/document/d/1o9OK54l2L1bFvS0jS1RUoyqV1qnCot4klRcmBVMGQHc/edit?usp=sharing")= t('poll.closure.method')
+
+%script(src="http://d3js.org/d3.v3.min.js")
+= erb :bar
+= erb :area
 

@@ -82,9 +82,13 @@ not_found do
 end
 
 get '/' do
+  haml :index
+end
+
+get '/datatron' do
   session[:color] = pick_color
   options = Poll.new.pick(2)
-  haml :index, locals: { options: options }
+  haml :datatron, locals: { options: options }
 end
 
 post '/respuestas' do
@@ -99,9 +103,9 @@ post '/respuestas' do
   flash[:finish] = true
   options = Poll.new.pick(2, params[:selected].to_i)
   if options.empty?
-    redirect '/'
+    redirect '/datatron'
   else
-    haml :index, locals: { options: options }
+    haml :datatron, locals: { options: options }
   end
 end
 
@@ -110,11 +114,19 @@ get '/resultados' do
 end
 
 get '/votes.json' do
-  Answer.votes_by_category.to_json
+  Answer.votes_by_category(params[:from], params[:to]).to_json
 end
 
 get '/answers/datasets.json' do
   Answer.datasets.to_json
+end
+
+get '/answers/daily.json' do
+  Answer.daily(params[:from], params[:to]).to_json
+end
+
+get '/answers/categories_dump.json' do
+  Answer.entries.to_json
 end
 
 get '/privacidad' do
