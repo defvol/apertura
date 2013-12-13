@@ -15,6 +15,13 @@ $(function() {
 
   // Dynamic fields
   dataRequestTemplate = $('.data-request').first().clone();
+
+  // Showing the middle finger to IE
+  // IE does not render foreignObject
+  if (typeof SVGForeignObjectElement !== 'undefined') {
+    $("#chart").addClass("supportsForeignObject");
+    // Note: could not find a way to detect this using modernizr
+  }
 });
 
 function toggleDisclaimer(e) {

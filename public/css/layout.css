@@ -48,13 +48,13 @@ svg .axis-label { visibility: collapse }
 
   p { font-size: 14px }
 
-  // IE does not render foreignObjects
+  // IE does not render foreignObject
   // which we used for the axis label,
   // therefore for IE we should keep the legend below the chart
   // to explain the bar chart
-  #chart.not-ie svg .axis-label { visibility: visible }
-  #chart.not-ie svg.bar-chart { height: 680px }
-  #chart.not-ie svg.legend {
+  #chart.supportsForeignObject svg .axis-label { visibility: visible }
+  #chart.supportsForeignObject svg.bar-chart { height: 680px }
+  #chart.supportsForeignObject svg.legend {
     height: 0;
     visibility: collapse;
   }
