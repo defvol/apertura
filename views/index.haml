@@ -1,11 +1,12 @@
 .container.landing
+  %h1= t('poll.closure.title')
+  %p= t('poll.closure.subtitle')
+  %hr
   %p.lead= t('poll.closure.bar.title')
   #chart
 
   %p.lead= t('poll.closure.area.title')
   #area
-
-  %p= t('poll.closure.area.footnote')
 
   %p.poll-action-wrapper
     %a(href="/answers/categories_dump.json")= t('poll.closure.data')
