@@ -23,14 +23,9 @@ p { font-size: 12px }
 
 #new-data-request { display: none }
 
-svg .axis-label {
-  visibility: collapse;
-}
-
-#chart svg.bar-chart {
-  height: 540px;
-}
-
+// Of SVGs and monsters
+svg .axis-label { visibility: collapse }
+#chart svg.bar-chart { height: 535px }
 #chart svg.legend {
   height: 260px;
   width: 300px;
@@ -53,15 +48,13 @@ svg .axis-label {
 
   p { font-size: 14px }
 
-  svg .axis-label {
-    visibility: visible;
-  }
-
-  #chart svg.bar-chart {
-    height: 680px;
-  }
-
-  #chart svg.legend {
+  // IE does not render foreignObjects
+  // which we used for the axis label,
+  // therefore for IE we should keep the legend below the chart
+  // to explain the bar chart
+  #chart.not-ie svg .axis-label { visibility: visible }
+  #chart.not-ie svg.bar-chart { height: 680px }
+  #chart.not-ie svg.legend {
     height: 0;
     visibility: collapse;
   }
