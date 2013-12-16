@@ -85,6 +85,10 @@ get '/' do
   haml :index
 end
 
+get '/resumen' do
+  haml :summary
+end
+
 get '/datatron' do
   session[:color] = pick_color
   options = Poll.new.pick(2)
