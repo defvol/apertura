@@ -10,6 +10,22 @@ body {
 header {
   background-color: #333;
   color: white;
+  height:280px;
+}
+
+nav.navbar-collapse {
+  background-color: #6559FB;
+}
+
+#nav.affix {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: transparent;
+}
+		
+#nav.affix + .row-fluid {
+  padding-top: 75px;	
 }
 
 p {
