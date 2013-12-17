@@ -1,7 +1,35 @@
 .container.landing
-  %ol
-    %li Evalúamos
-    %li
-      %a(href='/resumen') Encuéstamos
-    %li Construye la iniciativa
+  %div.row-fluid
+    %img.img-rounded(src="http://placehold.it/640x360" alt="¿qué son los datos abiertos?")
+  %div.row-fluid.long-text= t('landing.video.footnote_html')
+  %div.row-fluid.menu
+    %div.title= t('landing.menu.title')
+    %ul.options
+      %li
+        %a(href="#odra")= t('landing.menu.odra')
+      %li
+        %a(href="#datatron")= t('landing.menu.datatron')
+      %li
+        %a(href="#initiative")= t('landing.menu.initiative')
+
+  %div.row-fluid#odra
+    %h3= t('landing.odra.title')
+  %div.row-fluid
+    %p= t('landing.odra.summary')
+  %div.row-fluid
+    %a(href='/odra')= t('landing.odra.call-to-action')
+
+  %div.row-fluid#datatron
+    %h3= t('landing.datatron.title')
+  %div.row-fluid
+    %p= t('landing.datatron.summary')
+  %div.row-fluid
+    %a(href='/resumen')= t('landing.datatron.call-to-action')
+
+  %div.row-fluid#initiative
+    %h3= t('landing.initiative.title')
+  %div.row-fluid
+    %p= t('landing.initiative.summary')
+  %div.row-fluid
+    %a(href='/iniciativa')= t('landing.initiative.call-to-action')
 

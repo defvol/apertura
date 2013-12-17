@@ -20,6 +20,31 @@ es:
         other: Otro
       suggest: ¿Se nos pasa algo? Sugiere un tema
     signup: Registrar
+  landing:
+    menu:
+      title: ¿Cómo vamos?
+      odra: Evaluamos
+      datatron: Encuestamos
+      initiative: Ayúdanos
+    odra:
+      title: Evaluamos
+      summary: Realizamos un diagnóstico con especialistas a nivel internacional para determinar tanto oferta como demanda de Datos Abiertos, y hacer un diagnóstico del estado de preparación para una Política Nacional de Datos Abiertos en México. Participaron aproximadamente 70 dependencias del gobierno federal y entrevistamos a más de 120 funcionarios públicos, organizaciones de la sociedad civil, industria, academia y periodistas.
+      call-to-action: Conoce los principales hallazgos de este diagnóstico.
+    datatron:
+      title: Encuestamos
+      summary: Lanzamos el Data-tron, una encuesta digital a través de este portal, para conocer más sobre la demanda de Datos Abiertos y abrir el proceso a una mayor participación. El datatron pedía a los encuestados elegir qué datos de gobierno le gustaría conocer con una prueba A/B. Esto nos sirvió para entender las preferencias de la población en materia de Datos Abiertos y desarrollar un plan de acción con la demanda pública como eje rector.
+      call-to-action: Conoce los resultados y las metodología.
+    initiative:
+      title: Ayúdanos a construir la iniciativa
+      summary: |
+        <p>La Política Nacional de Datos Abiertos es una parte de una iniciativa más amplia e integral para crear un ecosistema de innovación, participación ciudadana y desarrollo, a través de los Datos Abiertos.</p>
+        <p>Tu opinión es importante. Por esto, presentamos esta iniciativa junto con sus documentos clave y la primera versión de la Política Nacional de Datos Abiertos en una plataforma editable, para obtener tu retroalimentación.</p>
+      call-to-action: Conoce la iniciativa completa.
+    video:
+      footnote_html: |
+        <p>Los Datos Abiertos permiten maximizar el valor de la información pública. El Gobierno de la República reconoce esto y está promoviendo una Iniciativa de Datos Abiertos. Esto significa que las bases de datos que se generan y administran desde el propio gobierno podrán ser publicadas con ciertas características, para que los datos sean utilizados, reutilizados y redistribuidos, y así crear valor. Esto beneficia a todos los sectores de la sociedad, desde el mismo gobierno, hasta la iniciativa privada, periodistas, academia y sociedad civil.</p>
+        <p>La Iniciativa de Datos Abiertos está diseñada con base en un proceso amplio y abierto de evaluación. Su objetivo es promover la participación ciudadana y crear un ecosistema capaz de convertir al gobierno en un proveedor confiable de Datos Abiertos, al tiempo que incentiva su demanda y capacidades de uso en todos los sectores de la población.</p>
+        <p>Este portal es un esfuerzo por dar a conocer esta Iniciativa. Te invitamos explorar, analizar y hacer cualquier pregunta acerca de los Datos Abiertos en México, así como a utilizarlos una vez que demos inicio a su publicación en los primeros meses de 2014.</p>
   layout:
     title: DATOS.GOB.MX
     header: DATOS.GOB.MX
