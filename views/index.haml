@@ -5,25 +5,26 @@
   
 
 
-  #nav{"data-offset-top" => "1000", "data-spy" => "affix"}
-    .navbar.navbar-default.navbar-static
-      .navbar-header
-        %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
-          %span.sr-only Toggle navigation
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand{href: "#"}= t('landing.menu.title')
-      .collapse.navbar-collapse
-        %ul.nav.navbar-nav
-          %li
-            %a(href="#odra")= t('landing.menu.odra')
-          %li
-            %a(href="#datatron")= t('landing.menu.datatron')
-          %li
-            %a(href="#initiative")= t('landing.menu.initiative')
-  
-  
+  #nav{"data-offset-top" => "1000", "data-spy" => "affix"} 
+    .navbar.navbar-inverse.navbar-satic
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{href: "#"}= t('landing.menu.title')
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li
+              %a(href="#odra")= t('landing.menu.odra')
+            %li
+              %a(href="#datatron")= t('landing.menu.datatron')
+            %li
+              %a(href="#initiative")= t('landing.menu.initiative')
+
+
   %div.row-fluid#odra
     %h3= t('landing.odra.title')
   %div.row-fluid
@@ -43,7 +44,13 @@
   %div.row-fluid
     %p= t('landing.initiative.summary')
   %div.row-fluid
-    %a(href='/iniciativa')= t('landing.initiative.call-to-action')
-    
-    
-  
+    %a(href='http://mexico-abierto.github.io/iniciativa-datos-abiertos')= t('landing.initiative.call-to-action')
+
+  :javascript
+  $(document).ready(function() {
+  $('#nav').affix({
+    offset: {
+      top: $('header').height()
+    }
+  });	
+
