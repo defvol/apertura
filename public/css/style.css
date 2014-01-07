@@ -10,6 +10,22 @@ body {
 header {
   background-color: #333;
   color: white;
+  height:280px;
+}
+
+nav.navbar-collapse {
+  background-color: #6559FB;
+}
+
+#nav.affix {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: transparent;
+}
+		
+#nav.affix + .row-fluid {
+  padding-top: 75px;	
 }
 
 p {
@@ -76,7 +92,12 @@ p.legend {
 }
 
 .container.poll, .container.results { text-align: center }
-.container.landing { padding-top: 60px; padding-bottom: 60px; }
+.container.landing .row-fluid { margin: 50px auto; }
+.container.landing img { width: 100% }
+
+div.long-text p {
+  margin-bottom: 20px;
+}
 
 footer {
   background-color: #333;
